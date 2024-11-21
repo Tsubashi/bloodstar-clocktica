@@ -220,6 +220,22 @@ p{
     border-color:#553412;
 }
 
+.traveller h1,
+.traveller h2,
+.traveller h3,
+.traveller h4,
+.traveller h5,
+.traveller h6,
+.traveller .ability,
+.traveller .team,
+.traveller .overview > p:nth-child(1)::first-letter,
+.traveller .overview > p + p::before {
+    color:#553412;
+}
+.traveller hr {
+    border-color:#553412;
+}
+
 .fabled h1,
 .fabled h2,
 .fabled h3,

@@ -13,7 +13,7 @@ option {
 .teamColorDemon {
     background-image: linear-gradient(to right, #ce0100ff 2px, #ce010000 2px, #ce010000 25%, #ce010040, #ce010000);
 }
-.teamColorTraveler {
+.teamColorTraveller {
     background-image: linear-gradient(to right, #22222200 2px, #222222ff 2px, #222222ff 25%, #222222c0, #222222ff), linear-gradient(to bottom, #1f65ff 50%, #ce0100 50%);
 }
 .teamColorFabled {

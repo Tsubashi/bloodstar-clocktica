@@ -17,15 +17,6 @@ Once you have cloned the repository, you can get set up to work in it by:
     - [Visual Studio Keymap](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree)
 5. For debugging I just press F12 in Firefox or Chrome. Firefox is expecially nice for live-editting css because it has that 'changes' tab to keep track of what you did. Chrome seems to do a little better at showing source-mapped callstacks.
 
-## pushing changes
-
-Due to the security changes in bitbucket, it seems I now have to do it like this:
-
-1. open Git Bash
-2. cd to this directory
-3. `eval $(ssh-agent)`
-4. `git push origin`
-
 ## How project was initialized
 
 Initial setup was done like this. **(DO NOT do this with an already set-up project)**

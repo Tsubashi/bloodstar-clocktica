@@ -11,7 +11,7 @@ const teamColorStyleMap = new Map<BloodTeam, string>([
     [BloodTeam.OUTSIDER, 'teamColorOutsider'],
     [BloodTeam.MINION, 'teamColorMinion'],
     [BloodTeam.DEMON, 'teamColorDemon'],
-    [BloodTeam.TRAVELER, 'teamColorTraveler'],
+    [BloodTeam.TRAVELLER, 'teamColorTraveller'],
     [BloodTeam.FABLED, 'teamColorFabled'],
     [BloodTeam.JINXES, 'teamColorJinxes'],
 ]);

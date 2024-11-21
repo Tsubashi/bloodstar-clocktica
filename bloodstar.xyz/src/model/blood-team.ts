@@ -7,14 +7,14 @@ export enum BloodTeam {
     OUTSIDER = 'outsider',
     MINION = 'minion',
     DEMON = 'demon',
-    TRAVELER = 'traveler',
+    TRAVELLER = 'traveller',
     FABLED = 'fabled',
     JINXES = 'jinxes',
     TOWNSFOLK_DISPLAY = 'Townsfolk',
     OUTSIDER_DISPLAY = 'Outsider',
     MINION_DISPLAY = 'Minion',
     DEMON_DISPLAY = 'Demon',
-    TRAVELER_DISPLAY = 'Traveler',
+    TRAVELLER_DISPLAY = 'Traveller',
     FABLED_DISPLAY = 'Fabled',
     JINXES_DISPLAY = 'Jinxes',
 }
@@ -33,7 +33,7 @@ export function parseBloodTeam(s:string):BloodTeam {
             return BloodTeam.DEMON;
         case "traveller":
         case "traveler":
-            return BloodTeam.TRAVELER;
+            return BloodTeam.TRAVELLER;
         case 'fabled':
             return BloodTeam.FABLED;
         case 'jinxes':
@@ -49,7 +49,7 @@ export const BLOODTEAM_OPTIONS:readonly {display:string; value:BloodTeam}[] = [
     {display: BloodTeam.OUTSIDER_DISPLAY, value: BloodTeam.OUTSIDER},
     {display: BloodTeam.MINION_DISPLAY, value: BloodTeam.MINION},
     {display: BloodTeam.DEMON_DISPLAY, value: BloodTeam.DEMON},
-    {display: BloodTeam.TRAVELER_DISPLAY, value: BloodTeam.TRAVELER},
+    {display: BloodTeam.TRAVELLER_DISPLAY, value: BloodTeam.TRAVELLER},
     {display: BloodTeam.FABLED_DISPLAY, value: BloodTeam.FABLED},
     {display: BloodTeam.JINXES_DISPLAY, value: BloodTeam.JINXES}
 ];
@@ -68,7 +68,7 @@ export function bloodTeamDisplayString(team:BloodTeam):string {
             return BloodTeam.DEMON_DISPLAY;
         case "traveller":
         case "traveler":
-            return BloodTeam.TRAVELER_DISPLAY;
+            return BloodTeam.TRAVELLER_DISPLAY;
         case 'fabled':
             return BloodTeam.FABLED_DISPLAY;
         case 'jinxes':

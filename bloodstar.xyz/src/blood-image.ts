@@ -587,8 +587,8 @@ export async function getGradientForTeam(team:BloodTeam, useOutsiderAndMinionCol
         case BloodTeam.DEMON:
             url = Images.DEMON_GRADIENT_URL;
             break;
-        case BloodTeam.TRAVELER:
-            url = Images.TRAVELER_GRADIENT_URL;
+        case BloodTeam.TRAVELLER:
+            url = Images.TRAVELLER_GRADIENT_URL;
             break;
         case BloodTeam.FABLED:
             url = Images.FABLED_GRADIENT_URL;
