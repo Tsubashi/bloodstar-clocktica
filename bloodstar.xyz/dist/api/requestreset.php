@@ -5,12 +5,13 @@
     $request = getPayload();
     $usernameOrEmail = requireField($request, 'usernameOrEmail');
     $email = $usernameOrEmail;
+    $username = $usernameOrEmail;
     $mysqli = makeMysqli();
 
     // if the email didn't have an @, assume it is the username instead and fetch the email from it
     if (false === strpos($usernameOrEmail, '@')) {
         $escapedUsername = $mysqli->real_escape_string($usernameOrEmail);
-        $result = $mysqli->query("SELECT `email` FROM `users` WHERE `users`.`name` = '$escapedUsername' LIMIT 1;");
+        $result = $mysqli->query("SELECT `email`,`name` FROM `users` WHERE `users`.`name` = '$escapedUsername' LIMIT 1;");
         if (false===$result){
             echo json_encode(array("error" => 'error looking up email'));
             exit();
@@ -21,6 +22,7 @@
         }
         $results = $result->fetch_all();
         $email = $results[0][0];
+        $username = $results[0][1];
     }
 
     // insert into reset table so we can see it when we verify
@@ -61,7 +63,7 @@
         exit();
     }
 
-    echo json_encode(array('email'=>$email));
+    echo json_encode(array('username'=>$username));
 
     $leeway = 60;
     $killTime = time() + $leeway;

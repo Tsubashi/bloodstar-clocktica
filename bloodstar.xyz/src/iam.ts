@@ -12,12 +12,12 @@ type RequestResetData = {usernameOrEmail:string};
 type ResendSignUpConfirmationData = {email:string};
 type ResetPasswordData = {
     code:string;
-    email:string;
+    username:string;
     password:string;
 };
 type ConfirmEmailResponse = 'alreadyConfirmed' | 'badCode' | 'expired' | 'notSignedUp' | {error:string} | {token:string; expiration:number; username:string; email:string};
 type ResetPasswordResponse = 'badCode' | 'expired' | {error:string} | {token:string; expiration:number; username:string; email:string};
-type EmailResponse = {email:string} | {error:string};
+type EmailResponse = {error:string} | {username:string};
 type SignUpResponse = 'emailTaken' | 'usernameTaken' | true | {error:string};
 type SignInData = {
     usernameOrEmail:string;
@@ -88,7 +88,7 @@ export async function resetPassword(resetData:ResetPasswordData):Promise<Session
         }
     }
     if ('error' in response) {
-        await showError('Error', `Error encountered while resetting password ${resetData.email}`, response.error);
+        await showError('Error', `Error encountered while resetting password for ${resetData.username}`, response.error);
         return null;
     }
     return response;
@@ -96,7 +96,7 @@ export async function resetPassword(resetData:ResetPasswordData):Promise<Session
 
 /**
  * send the sign up confirmation email again
- * @returns email address to which a confirmation email was sent, or the empty string
+ * @returns username whose address the a confirmation email was sent to, or the empty string
  */
 export async function resendSignUpConfirmation(email:string):Promise<string> {
     const data:ResendSignUpConfirmationData = {email};
@@ -106,7 +106,7 @@ export async function resendSignUpConfirmation(email:string):Promise<string> {
         await showError('Error', `Error encountered while requesting signup confirmation email for ${email}`, response.error);
         return '';
     }
-    return response.email;
+    return response.username;
 }
 
 /**
@@ -121,7 +121,7 @@ export async function sendPasswordResetCode(usernameOrEmail:string):Promise<stri
         await showError('Error', `Error encountered while trying to reset password for ${usernameOrEmail}`, response.error);
         return '';
     }
-    return response.email;
+    return response.username;
 }
 
 /**

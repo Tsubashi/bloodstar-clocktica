@@ -10,12 +10,12 @@ import { showError } from "./blood-message-dlg";
 
 type ResetPasswordData = {
     code:string;
-    email:string;
+    username:string;
     password:string;
 };
 
 class ConfirmAndChoosePasswordDlg extends AriaDialog<ResetPasswordData|null> {
-    async open(email:string, doWarning:boolean):Promise<ResetPasswordData|null> {
+    async open(username:string, doWarning:boolean):Promise<ResetPasswordData|null> {
         const codeField = createElement({
             t:'input',
             a:{type:'text', minlength:'6', maxlength:'6', autocomplete:'off', required:'', pattern:'[0-9]{6}', title:'six-digit code from your email'},
@@ -41,7 +41,8 @@ class ConfirmAndChoosePasswordDlg extends AriaDialog<ResetPasswordData|null> {
             {
                 t:'p',
                 a:{style:'max-width:400px'},
-                txt:`We have sent an email to "${email}" containing a 6-digit code. Please enter the code below, enter new password, then click the button below to continue.`
+                txt:`We have sent an email to the address on file for "${username}" containing a 6-digit code. \
+                Please enter the code below, enter new password, then click the button below to continue.`
             },
             {t:'div', css:['twoColumnGrid'], children:[
                 {t:'label', a:{for:'codeFromEmail', title:'six-digit code from your email'}, txt:'Code from email'},
@@ -56,14 +57,14 @@ class ConfirmAndChoosePasswordDlg extends AriaDialog<ResetPasswordData|null> {
                 {t:'button', id:'setPasswordBtn', txt:'Set password', a:{disabled:true}, events:{click:()=>{
                     this.close({
                         code:codeField.value,
-                        email:email,
+                        username,
                         password:passwordField.value
                     });
                 }}},
                 {t:'button', txt:'Cancel', events:{click:()=>{ this.close(); }}}
             ]},
             {t:'p', txt:"Didn't receive a code? ", a:{style:'align-self:center;'}, children:[
-                {t:'a', a:{href:'#'}, txt:'Send a new one', events:{click:async ()=>sendPasswordResetCode(email)}}
+                {t:'a', a:{href:'#'}, txt:'Send a new one', events:{click:async ()=>sendPasswordResetCode(username)}}
             ]}
         ] as CreateElementsOptions);
 
@@ -95,21 +96,21 @@ class ConfirmAndChoosePasswordDlg extends AriaDialog<ResetPasswordData|null> {
  * @returns promise that resolves to session info if successful, otherwise null
  */
 async function show():Promise<SessionInfo|null> {
-    const email = await showEnterEmailStep();
-    if (!email) {return null;}
-    return showCodeAndNewPasswordStep(email);
+    const username = await showEnterEmailStep();
+    if (!username) {return null;}
+    return showCodeAndNewPasswordStep(username);
 }
 
 /**
  * show the dialog for entering email code and new password
- * @param email email for the user whose password we are resetting
+ * @param username username for the user whose password we are resetting
  * @returns SessionInfo if password is sucessfully reset and we are logged in. otherwise null.
  */
-async function showCodeAndNewPasswordStep(email:string):Promise<SessionInfo|null> {
+async function showCodeAndNewPasswordStep(username:string):Promise<SessionInfo|null> {
     let warn = false;
     // eslint-disable-next-line no-constant-condition, @typescript-eslint/no-unnecessary-condition
     while (true) {
-        const resetData = await new ConfirmAndChoosePasswordDlg().open(email, warn);
+        const resetData = await new ConfirmAndChoosePasswordDlg().open(username, warn);
         if (!resetData) {return null;}
         warn = true;
         try {
@@ -125,7 +126,7 @@ async function showCodeAndNewPasswordStep(email:string):Promise<SessionInfo|null
 
 /**
  * bring up forgot-password dialogs
- * @returns promise that resolves to email address or username if the email was successfully sent
+ * @returns promise that resolves to username if the email was successfully sent
  */
 async function showEnterEmailStep():Promise<string> {
     const submitOnEnter = async (event:KeyboardEvent):Promise<void>=>{
@@ -143,7 +144,7 @@ async function showEnterEmailStep():Promise<string> {
         id:'requestResetDlgUsername',
         events:{keyup:submitOnEnter as unknown as EventListener}
     });
-    const email = await showDialog<string>(
+    const username = await showDialog<string>(
         null,
         'requestReset',
         [
@@ -156,7 +157,7 @@ async function showEnterEmailStep():Promise<string> {
             {label:'Cancel'}
         ]
     );
-    return email ?? '';
+    return username ?? '';
 }
 
 export default show;
