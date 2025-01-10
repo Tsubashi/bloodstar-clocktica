@@ -82,6 +82,23 @@
         }
     }
 
+    // error if field is not set in array, otherwise, return that field
+    function requireOneOf($arr, $fieldNameA, $fieldNameB) {
+        if (array_key_exists($fieldNameA, $arr))
+        {
+            return $arr[$fieldNameA];
+        }
+        else if (array_key_exists($fieldNameB, $arr))
+        {
+            return $arr[$fieldNameB];
+        }
+        else
+        {
+            echo json_encode(array("error" => "invalid request. must include field \"$fieldNameA\" or  \"$fieldNameB\""));
+            exit();
+        }
+    }
+
     function startsWith($haystack, $needle) {
         return strncmp($haystack, $needle, strlen($needle)) === 0;
     }

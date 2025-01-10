@@ -4,13 +4,33 @@
     requirePost();
     $request = getPayload();
     $code = requireField($request, 'code');
-    $email = requireField($request, 'email');
+    $email = requireOneOf($request, 'email', 'username');
     $password = requireField($request, 'password');
 
-    validateConfirmCode($code);
-    validateEmail($email);
-
     $mysqli = makeMysqli();
+
+    validateConfirmCode($code);
+
+    // accept username instead of email, but convert
+    if (strpos($email, '@') !== false) {
+        validateEmail($email);
+    } else {
+        validateUsername($email);
+        $escapedUsername = $mysqli->real_escape_string($email);
+        $result = $mysqli->query("SELECT `users`.`email` FROM `users`WHERE `users`.`name` = '$escapedUsername' LIMIT 1;");
+        if (false===$result){
+            echo json_encode(array("error" => 'sql error'));
+            exit();
+        }
+        if (0===$result->num_rows){
+            echo json_encode([
+                'title' => 'Sign-In Error',
+                'message' => 'Incorrect username or password.'
+            ]);
+            exit();
+        }
+        $email = $result->fetch_all()[0][0];
+    }
 
     // get code hash to validate
     $escapedEmail = $mysqli->real_escape_string($email);
