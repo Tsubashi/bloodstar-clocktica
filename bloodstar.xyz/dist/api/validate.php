@@ -6,6 +6,7 @@ $VALID_EMAIL_RE = '/^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9
 $CONFIRM_CODE_RE = '/^[0-9]{6}$/';
 $USERNAME_RE = '/^[A-Za-z0-9\-_]{2,}$/';
 $CHARACTERID_RE = $USERNAME_RE;
+$BANNED_RE = '/Unreleased.*Characters|Hua.*Deng.*Chu.*Shang/i';
 
 // error out if edition json does not look valid
 function validateBoolean($value) {
@@ -52,6 +53,12 @@ function validateCharacterId($id) {
 
 // error out if filename invalid
 function validateFilename($filename) {
+    global $BANNED_RE;
+    if (preg_match($BANNED_RE, $filename))
+    {
+        echo '{"error":"banned saveName"}';
+        exit();
+    }
     if (($filename==='') ||
         ($filename==='.') ||
         ($filename==='..') ||
