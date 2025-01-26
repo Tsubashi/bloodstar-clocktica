@@ -91,7 +91,7 @@ export default class BloodImage {
             this.canvas = document.createElement('canvas');
         }
 
-        const ctx = this.canvas.getContext('2d');
+        const ctx = this.canvas.getContext('2d', { willReadFrequently: true });
         if (!ctx) { throw new Error('Could not get CanvasRenderingContext2D'); }
         this.ctx = ctx;
 
