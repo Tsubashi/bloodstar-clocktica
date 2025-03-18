@@ -14,7 +14,7 @@ Once you have cloned the repository, you can get set up to work in it by:
 4. VS Code extensions I'm using
     - [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
     - [Todo Tree](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree)
-    - [Visual Studio Keymap](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree)
+    - [Visual Studio Keymap](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vs-keybindings)
 5. For debugging I just press F12 in Firefox or Chrome. Firefox is expecially nice for live-editting css because it has that 'changes' tab to keep track of what you did. Chrome seems to do a little better at showing source-mapped callstacks.
 
 ## How project was initialized
