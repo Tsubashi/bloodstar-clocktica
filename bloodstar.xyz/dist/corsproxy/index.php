@@ -1,4 +1,7 @@
 <?php
+
+include('../api/shared.php');
+
 // identify request headers
 $request_headers = array( );
 foreach ($_SERVER as $key => $value) {
@@ -117,7 +120,7 @@ foreach ($response_headers as $key => $response_header) {
     // Rewrite the `Location` header, so clients will also use the proxy for redirects.
     if (preg_match('/^Location:\s*/i', $response_header)) {
         list($header, $value) = preg_split('/: /', $response_header, 2);
-        $new_location = 'https://www.bloodstar.xyz/corsproxy/?url=' . urlencode($value);
+        $new_location = SITE_ROOT.'/corsproxy/?url=' . urlencode($value);
         $response_header = 'location: ' . $new_location;
         header($response_header, true);
     }

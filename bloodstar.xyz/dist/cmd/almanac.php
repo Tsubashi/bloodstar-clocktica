@@ -1,5 +1,6 @@
 <?php
     include('../parsedown/Parsedown.php');
+    include('shared.php');
 
     $Parsedown = new Parsedown();
 
@@ -14,14 +15,14 @@
 <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Nova+Script&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="https://www.bloodstar.xyz/p/almanac.css">
+<link rel="stylesheet" type="text/css" href="<?= SITE_ROOT ?>/p/almanac.css">
 <title>'.$name.' Almanac</title>
 </head><body><div class="almanac-row">
 <ol class="nav">'
 .makeNavItems($saveData)
 .'</ol><ol class="almanac-viewport">'
 .makeAlmanacItems($saveData, $saveName)
-.'<li class="generated-by">this almanac generated using <a href="https://www.bloodstar.xyz">Bloodstar Clocktica</a></li>'
+.'<li class="generated-by">this almanac generated using <a href="<?= SITE_ROOT ?>">Bloodstar Clocktica</a></li>'
 .'</ol></div></body></html>';
     }
 

@@ -75,8 +75,8 @@
 
     echo json_encode(array(
         'success' => true,
-        'script'=>'https://www.bloodstar.xyz/p/'.$saveName.'/script.json',
-        'almanac'=>'https://www.bloodstar.xyz/p/'.$saveName.'/almanac.html')
+        'script'=>SITE_ROOT.'/p/'.$saveName.'/script.json',
+        'almanac'=>SITE_ROOT.'/p/'.$saveName.'/almanac.html')
     );
 
     // examine script to see what images are used. delete any that are unused
@@ -129,7 +129,7 @@
                 if (preg_match("/^data:$/", $inMeta['logo'])) {
                     $outMeta['logo'] = $inMeta['logo'];
                 } else {
-                    $outMeta['logo'] = 'https://www.bloodstar.xyz/p/'.$saveName.'/_meta.png';
+                    $outMeta['logo'] = 'https://bloodstar.18m250.org/p/'.$saveName.'/_meta.png';
                 }
             }
 
@@ -161,7 +161,7 @@
                     if (preg_match("/^data:$/", $inCharacter['styledImage'])) {
                         $outCharacter['image'] = $inCharacter['styledImage'];
                     } else {
-                        $outCharacter['image'] = 'https://www.bloodstar.xyz/p/'.$saveName.'/'.$id.'.png';
+                        $outCharacter['image'] = 'https://bloodstar.18m250.org/p/'.$saveName.'/'.$id.'.png';
                     }
                 }
 

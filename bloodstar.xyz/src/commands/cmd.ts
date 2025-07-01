@@ -4,6 +4,7 @@
  */
 
 import { spinner } from "../dlg/spinner-dlg";
+import { SITE_ROOT } from "../config";
 
 const TIMEOUT = 15*1000;
 const MAXRETRIES = 1;
@@ -36,7 +37,7 @@ async function fetchWithTimeout(cmdName:string, body:BodyInit|undefined, timeout
         }
     }, timeout);
 
-    return fetch(`https://www.bloodstar.xyz/api/${cmdName}.php`, {
+    return fetch(`${SITE_ROOT}/api/${cmdName}.php`, {
         method: 'POST',
         mode: 'cors',
         signal: controllerSafe.signal,

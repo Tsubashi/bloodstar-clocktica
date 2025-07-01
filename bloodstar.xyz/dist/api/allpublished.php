@@ -27,8 +27,8 @@
             if (startsWith($edition, '.')) {continue;}
             $editionpath = join_paths($userpath, $edition);
             if (!is_dir($editionpath)) {continue;}
-            $scriptPath = "https://www.bloodstar.xyz/p/$user/$edition/script.json";
-            $almanacPath = "https://www.bloodstar.xyz/p/$user/$edition/almanac.html";
+            $scriptPath = SITE_ROOT."/p/$user/$edition/script.json";
+            $almanacPath = SITE_ROOT."/p/$user/$edition/almanac.html";
             $entry = array();
             if (file_exists(join_paths($editionpath, 'script.json'))) {
                 array_push($entry, $scriptPath);

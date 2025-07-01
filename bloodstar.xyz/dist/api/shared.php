@@ -1,6 +1,8 @@
 <?php
     include('jwt.php');
     include('validate.php');
+
+    define('SITE_ROOT', getenv('BLOODSTAR_ROOT_URL') ?? 'https://bloodstar.clocktica.com');
     
     function join_paths($a, $b) {
         return join('/', array(trim($a, '/'), trim($b, '/')));

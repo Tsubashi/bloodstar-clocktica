@@ -1,0 +1,1 @@
+export const SITE_ROOT: string = 'https://bloodstar.clocktica.com'

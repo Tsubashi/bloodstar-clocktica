@@ -5,8 +5,8 @@
     include('jwt.php');
     header('Content-Type: application/json;');
 
-    $privateKey = file_get_contents('../../protected/jwtRS256.key');
-    $publicKey = file_get_contents('../../protected/jwtRS256.key.pub');
+    $privateKey = file_get_contents('../../protected/jwt_key.pem');
+    $publicKey = file_get_contents('../../protected/jwt_key.pub');
     $data = "SomeData";
     $signResult = openssl_sign($data,$signature,$privateKey,'SHA256');
     $encodedSignature = base64urlEncode($signature);

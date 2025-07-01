@@ -6,7 +6,7 @@ A Web utility for creating custom scripts and almanacs for the game _Blood on th
 
 0. Clone repository to server
 0. Create the files needed in the `persistent/protected` directory (see README.md in that folder)
-0. Do a global search and replace to substitute in the new domain name (ie. `s/bloodstar.xyz/bloodstar.18m250.org/g`)
+0. Update the domain name in `api/shared.php` and `src/config.ts`
 0. Run `npm run buildprod`
 0. Copy the `fonts` directory to the `dist` folder
 0. Copy and fill in the sample `.env` file

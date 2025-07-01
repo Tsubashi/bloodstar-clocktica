@@ -68,8 +68,8 @@
 
     echo json_encode(array(
         'success' => true,
-        'script'=>"https://www.bloodstar.xyz/p/$username/$saveName/script.json",
-        'almanac'=>"https://www.bloodstar.xyz/p/$username/$saveName/almanac.html")
+        'script'=>SITE_ROOT."/p/$username/$saveName/script.json",
+        'almanac'=>SITE_ROOT."/p/$username/$saveName/almanac.html")
     );
 
     // copy field if it is present
@@ -158,11 +158,11 @@
                 if (preg_match("/^data:$/", $inMeta['logo'])) {
                     $outMeta['logo'] = $inMeta['logo'];
                 } else {
-                    $outMeta['logo'] = "https://www.bloodstar.xyz/p/$username/$saveName/_meta.png";
+                    $outMeta['logo'] = "https://bloodstar.18m250.org/p/$username/$saveName/_meta.png";
                 }
             }
 
-            $outMeta['almanac'] = "https://www.bloodstar.xyz/p/$username/$saveName/almanac.html";
+            $outMeta['almanac'] = "https://bloodstar.18m250.org/p/$username/$saveName/almanac.html";
 
             $scriptData[] = &$outMeta;
         }
@@ -192,7 +192,7 @@
                     if (preg_match("/^data:$/", $inCharacter['styledImage'])) {
                         $outCharacter['image'] = $inCharacter['styledImage'];
                     } else {
-                        $outCharacter['image'] = "https://www.bloodstar.xyz/p/$username/$saveName/$id.png";
+                        $outCharacter['image'] = "https://bloodstar.18m250.org/p/$username/$saveName/$id.png";
                     }
                 }
 
@@ -259,8 +259,8 @@
 
         // add links
         $clone['links'] = array(
-            'script' => "https://www.bloodstar.xyz/p/$username/$saveName/script.json",
-            'almanac' => "https://www.bloodstar.xyz/p/$username/$saveName/almanac.html"
+            'script' => "https://bloodstar.18m250.org/p/$username/$saveName/script.json",
+            'almanac' => "https://bloodstar.18m250.org/p/$username/$saveName/almanac.html"
         );
 
         // convert logo path to point at published version
@@ -268,7 +268,7 @@
             $meta = $clone['meta'];
             if (array_key_exists('logo', $meta)){
                 if (!preg_match("/^data:$/", $meta['logo'])) {
-                    $meta['logo'] = "https://www.bloodstar.xyz/p/$username/$saveName/_meta.png";
+                    $meta['logo'] = "https://bloodstar.18m250.org/p/$username/$saveName/_meta.png";
                 }
             }
             // reassign so the changes stick
@@ -295,7 +295,7 @@
                 $id = $character['id'];
                 if (array_key_exists('styledImage', $character)) {
                     if (!preg_match("/^data:$/", $character['styledImage'])) {
-                        $character['styledImage'] = "https://www.bloodstar.xyz/p/$username/$saveName/$id.png";
+                        $character['styledImage'] = "https://bloodstar.18m250.org/p/$username/$saveName/$id.png";
                     }
                 }
                 if (array_key_exists('unStyledImage', $character)) {

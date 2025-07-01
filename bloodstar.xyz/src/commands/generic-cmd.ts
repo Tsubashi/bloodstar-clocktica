@@ -109,7 +109,7 @@ async function runCmd<
         response = await cmd<CmdResult<ResponseDataType>>(options.command, options.spinnerMessage, JSON.stringify(requestSafe), options.controller);
     }
     if (response === 'signInRequired') {return {cancel:'signInFailed'};}
-    if ((typeof response === 'object') && ('error' in response)) {
+    if (response && (typeof response === 'object') && ('error' in response)) {
         return {error:String(response.error)};
     }
     return {data:response};

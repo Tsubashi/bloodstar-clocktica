@@ -14,6 +14,7 @@ import genericCmd, { GenericCmdOptions } from './generic-cmd';
 import signIn from '../sign-in';
 import { TimeoutError } from './cmd';
 import { show as getConfirmation, YesNoOptions } from '../dlg/yes-no-dlg';
+import { SITE_ROOT } from '../config';
 
 type ExistsRequest = {
     saveName:string;
@@ -120,20 +121,20 @@ async function separateImages(username:string, edition:Edition):Promise<Separate
 
         const unStyledImageStr = character.unStyledImage;
         if (unStyledImageStr?.startsWith('data:')) {
-            character.unStyledImage = `https://www.bloodstar.xyz/usersave/${username}/${saveName}/${id}.src.png`;
+            character.unStyledImage = `${SITE_ROOT}/usersave/${username}/${saveName}/${id}.src.png`;
             sourceImages.set(id, unStyledImageStr);
         }
 
         const styledImageStr = character.styledImage;
         if (styledImageStr?.startsWith('data:')) {
-            character.styledImage = `https://www.bloodstar.xyz/usersave/${username}/${saveName}/${id}.png`;
+            character.styledImage = `${SITE_ROOT}/usersave/${username}/${saveName}/${id}.png`;
             finalImages.set(id, styledImageStr);
         }
     }
     const meta = editionSerialized.meta as {logo?:string};
     const {logo} = meta;
     if (logo?.startsWith('data:')) {
-        meta.logo = `https://www.bloodstar.xyz/usersave/${username}/${saveName}/_meta.png`;
+        meta.logo = `${SITE_ROOT}/usersave/${username}/${saveName}/_meta.png`;
     }
 
     return {

@@ -3,6 +3,7 @@
  * @module Util
  */
 import {showError, showNoWait as showMessageNoWait} from './dlg/blood-message-dlg';
+import {SITE_ROOT} from './config';
 
 /** configuration used to create DOM elements */
 export type CreateElementOptions<K extends keyof HTMLElementTagNameMap> = {
@@ -132,7 +133,7 @@ export async function fetchJson<T>(uri:string):Promise<T|null> {
 
 /** get url for when you want to use a cors proxy */
 export function getCorsProxyUrl(url:string):string {
-    return `https://www.bloodstar.xyz/corsproxy/?url=${encodeURIComponent(escape(url))}`;
+    return `${SITE_ROOT}/corsproxy/?url=${encodeURIComponent(escape(url))}`;
 }
 
 /** set event listeners for clicks, return a function you can call to undo it */

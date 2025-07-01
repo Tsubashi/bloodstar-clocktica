@@ -1,5 +1,6 @@
 <?php
     include('../parsedown/Parsedown.php');
+    include('shared.php');
 
     $Parsedown = new Parsedown();
 
@@ -14,8 +15,8 @@
 <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Nova+Script&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" media="screen" href="https://www.bloodstar.xyz/p/almanac.css">
-<link rel="stylesheet" type="text/css" media="print" href="https://www.bloodstar.xyz/p/print.css">
+<link rel="stylesheet" type="text/css" media="screen" href="<?= SITE_ROOT ?>/p/almanac.css">
+<link rel="stylesheet" type="text/css" media="print" href="<?= SITE_ROOT ?>/p/print.css">
 <title>'.$name.' Almanac</title>
 </head><body><div class="almanac-row">
 <ol class="nav">'
@@ -23,7 +24,7 @@
 .'</ol><ol class="almanac-viewport">'
 .makeAlmanacItems($saveData, $username, $saveName)
 .makeNightOrder($saveData, $username, $saveName)
-.'<li class="generated-by">this almanac generated using <a href="https://www.bloodstar.xyz">Bloodstar Clocktica</a></li>'
+.'<li class="generated-by">this almanac generated using <a href="<?= SITE_ROOT ?>">Bloodstar Clocktica</a></li>'
 .'<li class="donate"><span>Enjoying Bloodstar? Buy me a coffee!</span><form action="https://www.paypal.com/donate" method="post" target="_top">
     <input type="hidden" name="business" value="XETJMX9JKLGKQ" />
     <input type="hidden" name="no_recurring" value="0" />
