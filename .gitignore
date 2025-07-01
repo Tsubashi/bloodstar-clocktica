@@ -8,4 +8,6 @@ bloodstar.xyz/dist/*.css
 bloodstar.xyz/dist/*.js
 bloodstar.xyz/dist/fonts/
 bloodstar.xyz/dist/*.js.LICENSE.txt
+bloodstar.xyz/persistent/
+bloodstar.xyz/.env
 phpmyadmininfo

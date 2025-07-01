@@ -29,7 +29,7 @@ function base64urlEncode($input){
 // verify a session token - returns decoded payload when successful. notably containing the string keys 'username' and 'email'
 function verifySession($token){
     try {
-        $secretKey = file_get_contents('../../protected/jwtRS256.key.pub');
+        $secretKey = file_get_contents('../../protected/jwt_key.pub');
         if (false === $secretKey){
             echo json_encode(array('error' =>'could not open key file'));
             exit();
@@ -92,7 +92,7 @@ function createToken($email, $username, $expiration) {
     $payload = ['iat'=>time(), 'email'=>$email, 'username'=>$username, 'exp'=>$expiration];
     $encodedPayload = base64urlEncode(json_encode($payload));
 
-    $secretKey = file_get_contents('../../protected/jwtRS256.key');
+    $secretKey = file_get_contents('../../protected/jwt_key.pem');
     if (false === $secretKey){
         echo json_encode(array('error' =>'could not open key file'));
         exit();

@@ -1,6 +1,7 @@
 <?php
     header('Content-Type: application/json;');
     include('shared.php');
+    require('../mailer/shared_setup.php');
     requirePost();
     $request = getPayload();
     $usernameOrEmail = requireField($request, 'usernameOrEmail');
@@ -49,22 +50,25 @@
     }
 
     // send email with the code
-    $headers = "MIME-Version: 1.0\r\n"
-             . "Content-type: text/html; charset=iso-8859-1\r\n"
-             . "From: no-reply@bloodstar.xyz\r\n"
-             . "Reply-To: no-reply@bloodstar.xyz\r\n"
-             . "X-Mailer: PHP/" . phpversion();
-    $body = '<html><body>'
-        . '<p>Use the code below to finish resetting your password.</p>'
-        . "<p style=\"font-size:larger;\">$confirmCode</a>"
-        . '</body></html>';
-    if (!mail($email, 'Bloodstar Clocktica password reset', $body, $headers)){
-        echo json_encode(array('error'=>'failed to send password reset email'));
+    try {
+        $mail = getMailer();
+        $mail->addAddress($email, $username);
+        $mail->Subject = 'Bloodstar Clocktica password reset';
+        $mail->isHTML(true);
+        $mail->Body = '<html><body>'
+            . '<p>Use the code below to finish resetting your password.</p>'
+            . "<p style=\"font-size:larger;\">$confirmCode</a>"
+            . '</body></html>';
+        $mail->AltBody = "Use the code below to finish resetting your password.\n\n$confirmCode";
+        $mail->send();
+    } catch (Exception $e) {
+        echo json_encode(array('error' => 'failed to send password reset email: ' . $e->getMessage()));
         exit();
     }
 
     echo json_encode(array('username'=>$username));
 
+    // clean up old reset requests
     $leeway = 60;
     $killTime = time() + $leeway;
     try {

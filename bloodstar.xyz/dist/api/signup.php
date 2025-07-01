@@ -1,6 +1,7 @@
 <?php
     header('Content-Type: application/json;');
     include('shared.php');
+    require('../mailer/shared_setup.php');
     requirePost();
     $request = getPayload();
     $username = requireField($request, 'username');
@@ -64,23 +65,25 @@
     }
 
     // send email with the code
-    $escapeEmail = urlencode($email);
-    $headers = "MIME-Version: 1.0\r\n"
-             . "Content-type: text/html; charset=iso-8859-1\r\n"
-             . "From: no-reply@bloodstar.xyz\r\n"
-             . "Reply-To: no-reply@bloodstar.xyz\r\n"
-             . "X-Mailer: PHP/" . phpversion();
-    $body = '<html><body>'
-          . '<p>Use the code below to finish creating your account.</p>'
-          . "<p style=\"font-size:larger;\">$confirmCode</a>"
-          . '</body></html>';
-    if (!mail($email, 'Bloodstar Clocktica sign-up confirmation', $body, $headers)){
-        echo json_encode(array('error'=>'failed to send confirmation email'));
+    try {
+        $mail = getMailer();
+        $mail->addAddress($email, $username);
+        $mail->Subject = 'Bloodstar Clocktica sign-up confirmation';
+        $mail->isHTML(true);
+        $mail->Body = '<html><body>'
+                    . '<p>Use the code below to finish creating your account.</p>'
+                    . "<p style=\"font-size:larger;\">$confirmCode</a>"
+                    . '</body></html>';
+        $mail->AltBody = 'Use the code below to finish creating your account: ' . $confirmCode;
+        $mail->send();
+    } catch (Exception $e) {
+        echo json_encode(array('error'=>'failed to send confirmation email: ' . $e->getMessage()));
         exit();
     }
 
     echo 'true';
 
+    // clean up old unconfirmed accounts
     $leeway = 60;
     $killTime = time() + $leeway;
     try {

@@ -1,6 +1,19 @@
-# Setup
+# Bloodstar Clocktica
 
-## Getting started
+A Web utility for creating custom scripts and almanacs for the game _Blood on the Clocktower_.
+
+## Deploy to a new server
+
+0. Clone repository to server
+0. Create the files needed in the `persistent/protected` directory (see README.md in that folder)
+0. Do a global search and replace to substitute in the new domain name (ie. `s/bloodstar.xyz/bloodstar.18m250.org/g`)
+0. Run `npm run buildprod`
+0. Copy the `fonts` directory to the `dist` folder
+0. Copy and fill in the sample `.env` file
+0. Run `docker compose up -d`
+0. Initialize the database using `schema.sql`
+
+## Developing
 
 Once you have cloned the repository, you can get set up to work in it by:
 
