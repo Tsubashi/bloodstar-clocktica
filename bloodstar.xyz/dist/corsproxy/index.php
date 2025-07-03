@@ -61,10 +61,6 @@ if ($request_method == 'GET' && count($request_params) > 0 && (!array_key_exists
     $request_url .= '?' . http_build_query($request_params);
 }
 
-function startsWith($haystack, $needle) {
-    return strncmp($haystack, $needle, strlen($needle)) === 0;
-}
-
 function getUrl($request_url, $request_method, $request_headers, $count) {
     // limit redirects
     if ($count < 0) {
