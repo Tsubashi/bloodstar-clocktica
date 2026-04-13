@@ -1,6 +1,6 @@
 <?php
     header('Content-Type: application/json;');
-    include('shared.php');
+    require_once('shared.php');
     requirePost();
     $request = getPayload();
     $token = requireField($request, 'token');
@@ -26,7 +26,7 @@
         echo('{"users":[]}');
         exit();
     }
-    
+
     // build array to return
     $users = array();
 

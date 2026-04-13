@@ -1,6 +1,6 @@
 <?php
     header('Content-Type: application/json;');
-    include('shared.php');
+    require_once('shared.php');
     requirePost();
     $request = getPayload();
     $token = requireField($request, 'token');
@@ -19,7 +19,7 @@
         echo('{"data":'.$data.'}');
         exit();
     }
-    
+
     // otherwise, your opening a shared save
     include('permission.php');
     list($owner, $saveName) = $saveName;

@@ -1,5 +1,5 @@
 <?php
-    include('shared.php');
+    require_once('shared.php');
     include('almanac.php');
     requirePost();
     $data = getPayload();

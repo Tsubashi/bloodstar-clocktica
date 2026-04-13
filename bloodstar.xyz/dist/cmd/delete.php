@@ -1,12 +1,12 @@
 <?php
-    include('shared.php');
+    require_once('shared.php');
     requirePost();
     $data = getPayload();
 
     $saveName = requireField($data, 'saveName');
 
     deleteEdition($saveName);
-    
+
     echo json_encode(array('success' => true));
 
     // remove an entire edition from the server

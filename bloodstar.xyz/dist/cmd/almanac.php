@@ -1,6 +1,6 @@
 <?php
     include('../parsedown/Parsedown.php');
-    include('shared.php');
+    require_once('shared.php');
 
     $Parsedown = new Parsedown();
 
@@ -8,7 +8,7 @@
     function makeAlmanac($saveData, $saveName) {
         $name = $saveData['meta']['name'];
 
-        return 
+        return
 '<!DOCTYPE html><html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -69,7 +69,7 @@
                 $team = $character['team'] ?? 'townsfolk';
                 $teamDisplay = ucfirst($team);
                 $name = $character['name'] ?? 'New Character';
-                
+
                 // begin page
                 $almanacHtml .= "<li class=\"page\" id=\"$id\"><div class=\"page-contents $team\" ";
 
@@ -113,7 +113,7 @@
                         $almanacHtml .= '</div>';
                     }
                 }
-                
+
                 // examples
                 {
                     $examples = $almanac['examples'] ?? '';
@@ -145,7 +145,7 @@
                         $almanacHtml .= '</div>';
                     }
                 }
-                
+
 
                 // team, end page tags
                 $almanacHtml .= "<p class=\"team\">$teamDisplay</p></div></li>";
@@ -202,7 +202,7 @@
     // variable substitutions
     function doSubstitutions($character, $originalText) {
         $name = $character['name'] ?? 'New Character';
-        return str_replace('$capname', strtoupper($name), 
+        return str_replace('$capname', strtoupper($name),
             str_replace('$name', $name, $originalText));
     }
 ?>

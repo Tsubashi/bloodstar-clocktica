@@ -1,6 +1,6 @@
 <?php
     header('Content-Type: application/json;');
-    include('shared.php');
+    require_once('shared.php');
     requirePost();
     $request = getPayload();
     $code = requireField($request, 'code');
@@ -75,7 +75,7 @@
         echo json_encode(['error'=>'Could not delete record']);
         exit();
     }
-    
+
     $username = lookUpUsername($mysqli, $email);
     $token = createToken($email, $username, $expiration);
     echo json_encode(array('token' => $token,'expiration' => $expiration,'email'=>$email,'username'=>$username));

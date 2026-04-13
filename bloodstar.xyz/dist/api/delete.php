@@ -1,6 +1,6 @@
 <?php
     header('Content-Type: application/json;');
-    include('shared.php');
+    require_once('shared.php');
     requirePost();
     $request = getPayload();
     $token = requireField($request, 'token');
@@ -11,11 +11,11 @@
 
     $saveName = requireField($request, 'saveName');
     validateFilename($saveName);
-    
+
     deleteEdition($username, $saveName);
 
     echo('true');
-    
+
     // remove an entire edition from the server
     function deleteEdition($username, $saveName) {
         $userSaveDir = join_paths('../usersave', $username);

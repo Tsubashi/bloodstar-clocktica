@@ -2,7 +2,7 @@
     $imageSizeMax = 512*1024;
     $maxImages = 200;
     header('Content-Type: application/json;');
-    include('shared.php');
+    require_once('shared.php');
     requirePost();
     $data = getPayload();
     $token = requireField($data, 'token');
@@ -48,7 +48,7 @@
         if (!file_exists($userSaveDir)) {
             mkdir($userSaveDir, 0777, true);
         }
-        
+
         $editionFolder = join_paths($userSaveDir, $saveName);
         if (!file_exists($editionFolder)) {
             $success = mkdir($editionFolder, 0777, true);
@@ -59,7 +59,7 @@
         }
 
         $suffix = $isSource ? '.src.png' : '.png';
-        
+
         $path = join_paths($editionFolder, $id.$suffix);
 
         try {

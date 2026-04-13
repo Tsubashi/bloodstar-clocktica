@@ -1,6 +1,6 @@
 <?php
     header('Content-Type: application/json;');
-    include('shared.php');
+    require_once('shared.php');
     require('../mailer/shared_setup.php');
     requirePost();
     $request = getPayload();

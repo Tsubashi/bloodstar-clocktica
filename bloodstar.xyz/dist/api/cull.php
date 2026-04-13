@@ -2,14 +2,14 @@
     ini_set('display_errors', '1');
     ini_set('display_startup_errors', '1');
     error_reporting(E_ALL);
-    
+
     $days = 365;
     $time = time();
     $deleted = array();
 
     header('Content-Type: application/json;');
-    
-    include('shared.php');
+
+    require_once('shared.php');
 
     $publishDir = '../p';
     $saveDir = '../usersave';

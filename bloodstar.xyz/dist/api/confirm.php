@@ -1,6 +1,6 @@
 <?php
     header('Content-Type: application/json;');
-    include('shared.php');
+    require_once('shared.php');
     requirePost();
     $request = getPayload();
     $email = requireField($request, 'email');
@@ -8,7 +8,7 @@
 
     validateConfirmCode($confirmCode);
     validateEmail($email);
-    
+
     // get signup data
     $mysqli = makeMysqli();
     $escapedEmail = $mysqli->real_escape_string($email);
@@ -47,7 +47,7 @@
         echo json_encode(['error'=>'Could not delete record']);
         exit();
     }
-    
+
     $username = lookUpUsername($mysqli, $escapedEmail);
     $token = createToken($email, $username, $expiration);
     echo json_encode(array('token' => $token,'expiration' => $expiration,'email'=>$email,'username'=>$username));

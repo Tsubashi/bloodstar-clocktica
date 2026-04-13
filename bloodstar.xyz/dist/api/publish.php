@@ -1,6 +1,6 @@
 <?php
     header('Content-Type: application/json;');
-    include('shared.php');
+    require_once('shared.php');
     include('almanac.php');
     requirePost();
     $request = getPayload();
@@ -11,7 +11,7 @@
 
     $saveName = requireField($request, 'saveName');
     validateFilename($saveName);
-    
+
     // read save file
     $data = readEditionFile($username, $saveName);
     $data = json_decode($data, true);
@@ -211,7 +211,7 @@
                 copyFieldWithSubstitutions($inCharacter, 'ability', $outCharacter, 'ability');
                 copySpecial($inCharacter, $outCharacter);
                 copyFieldWithSubstitutions($inCharacter, 'attribution', $outCharacter, 'attribution');
-                
+
                 if (array_key_exists('almanac', $inCharacter)) {
                     $almanac = $inCharacter['almanac'];
                     copyField($almanac, 'flavor', $outCharacter, 'flavor');

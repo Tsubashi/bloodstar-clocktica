@@ -1,6 +1,6 @@
 <?php
     header('Content-Type: application/json;');
-    include('shared.php');
+    require_once('shared.php');
     requirePost();
     $request = getPayload();
     $token = requireField($request, 'token');
@@ -11,13 +11,13 @@
 
     $email = requireField($tokenPayload, 'email');
     validateEmail($email);
-    
+
     $password = requireField($request, 'password');
 
     $mysqli = makeMysqli();
     $escapedUsername = $mysqli->real_escape_string($username);
     $escapedEmail = $mysqli->real_escape_string($email);
-    
+
     $result = $mysqli->query("SELECT `hash` FROM `hash` WHERE `hash`.`email` = '$escapedEmail' LIMIT 1;");
     if (false===$result){
         echo json_encode(['error' => 'sql error']);

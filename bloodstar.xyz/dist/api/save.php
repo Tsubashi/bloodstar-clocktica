@@ -2,12 +2,12 @@
     $maxEditions = 30;
     $maxCharacters = 50;
     header('Content-Type: application/json;');
-    include('shared.php');
+    require_once('shared.php');
     requirePost();
     $request = getPayload();
     $token = requireField($request, 'token');
     $tokenPayload = verifySession($token);
-    
+
     $username = $tokenPayload['username'];
     validateUsername($username);
     $bigLimitUsername = "Poria";

@@ -1,13 +1,13 @@
 <?php
     header('Content-Type: application/json;');
-    include('shared.php');
+    require_once('shared.php');
     requirePost();
     $request = getPayload();
     $token = requireField($request, 'token');
     $tokenPayload = verifySession($token);
     $username = $tokenPayload['username'];
     $userSaveDir = join_paths('../usersave', $username);
-    
+
     if (!file_exists($userSaveDir)) {
         mkdir($userSaveDir, 0777, true);
     }
@@ -32,7 +32,7 @@
         echo json_encode(array('files' => $yourFiles));
         exit();
     }
-    
+
     $sharedFiles = getSharedFiles($username);
     echo json_encode(array('files' => $yourFiles, 'shared' => $sharedFiles));
 

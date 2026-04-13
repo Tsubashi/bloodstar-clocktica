@@ -4,7 +4,7 @@
     error_reporting(E_ALL);
 
     header('Content-Type: application/json;');
-    include('shared.php');
+    require_once('shared.php');
 
     $results = array();
 

@@ -1,6 +1,6 @@
 <?php
     include('../parsedown/Parsedown.php');
-    include('shared.php');
+    require_once('shared.php');
 
     $Parsedown = new Parsedown();
 
@@ -8,7 +8,7 @@
     function makeAlmanac($saveData, $username, $saveName) {
         $name = $saveData['meta']['name'];
 
-        return 
+        return
 '<!DOCTYPE html><html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -40,7 +40,7 @@
     function makeNightOrder($saveData, $username, $saveName) {
         if (!array_key_exists('characterList', $saveData)){return '';}
         if (!array_key_exists('firstNightOrder', $saveData)){return '';}
-        
+
         $almanacHtml = '';
 
         // build character map
@@ -62,13 +62,13 @@
                 $otherNightCharacterMap[$id] = $character;
             }
         }
-        
+
         // begin page
         $almanacHtml .= "<li class=\"page\" id=\"nightOrder\"><div class=\"page-contents\"><h2>Night Order</h2><div class=\"nightOrder\">";
 
         // begin first night column
         $almanacHtml .= "<div class=\"firstNightColumn\"><h3>First Night</h3><div class=\"nightOrderList\">";
-        
+
         // each character in first night
         $firstNightOrder = $saveData['firstNightOrder'];
         foreach ($firstNightOrder as $characterId) {
@@ -94,7 +94,7 @@
 
         // begin other nights column
         $almanacHtml .= "<div class=\"otherNightsColumn\"><h3>Other Nights</h3><div class=\"nightOrderList\">";
-        
+
         // each character in other nights
         $otherNightOrder = $saveData['otherNightOrder'];
         foreach ($otherNightOrder as $characterId) {
@@ -178,7 +178,7 @@
                 $team = $character['team'] ?? 'townsfolk';
                 $teamDisplay = ucfirst($team);
                 $name = $character['name'] ?? 'New Character';
-                
+
                 // begin page
                 $almanacHtml .= "<li class=\"page\" id=\"$id\"><div class=\"page-contents $team\">";
 
@@ -202,7 +202,7 @@
 
                 if (array_key_exists('almanac', $character)) {
                     $almanac = $character['almanac'];
-    
+
                     // flavor
                     {
                         $flavor = $almanac['flavor'] ?? '';
@@ -211,7 +211,7 @@
                             $almanacHtml .= "<div class=\"flavor\">$flavorHtml</div>";
                         }
                     }
-    
+
                     // overview
                     {
                         $overview = $almanac['overview'] ?? '';
@@ -221,7 +221,7 @@
                             $almanacHtml .= '</div>';
                         }
                     }
-                    
+
                     // examples
                     {
                         $examples = $almanac['examples'] ?? '';
@@ -232,7 +232,7 @@
                             $almanacHtml .= '</div>';
                         }
                     }
-    
+
                     // how to run
                     {
                         $howToRun = $almanac['howToRun'] ?? '';
@@ -263,7 +263,7 @@
                     $almanacHtml .= $Parsedown->text(doSubstitutions($character, $attribution));
                     $almanacHtml .= "</div>";
                 }
-                
+
                 // team
                 $almanacHtml .= "<p class=\"team\">$teamDisplay</p>";
 
@@ -328,7 +328,7 @@
     // variable substitutions
     function doSubstitutions($character, $originalText) {
         $name = $character['name'] ?? 'New Character';
-        return str_replace('$capname', strtoupper($name), 
+        return str_replace('$capname', strtoupper($name),
             str_replace('$name', $name, $originalText));
     }
 ?>
