@@ -75,8 +75,8 @@
 
     echo json_encode(array(
         'success' => true,
-        'script'=>SITE_ROOT.'/p/'.$saveName.'/script.json',
-        'almanac'=>SITE_ROOT.'/p/'.$saveName.'/almanac.html')
+        'script'=> SITE_ROOT . '/p/' . $saveName . '/script.json',
+        'almanac'=> SITE_ROOT . '/p/' . $saveName . '/almanac.html')
     );
 
     // examine script to see what images are used. delete any that are unused

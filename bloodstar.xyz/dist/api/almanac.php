@@ -15,24 +15,17 @@
 <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Nova+Script&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" media="screen" href="<?= SITE_ROOT ?>/p/almanac.css">
-<link rel="stylesheet" type="text/css" media="print" href="<?= SITE_ROOT ?>/p/print.css">
-<title>'.$name.' Almanac</title>
+<link rel="stylesheet" type="text/css" media="screen" href="'. SITE_ROOT .'/p/almanac.css">
+<link rel="stylesheet" type="text/css" media="print" href="'. SITE_ROOT .'/p/print.css">
+<title>'.$name.' Almanac - Bloodstar</title>
 </head><body><div class="almanac-row">
 <ol class="nav">'
 .makeNavItems($saveData)
 .'</ol><ol class="almanac-viewport">'
 .makeAlmanacItems($saveData, $username, $saveName)
 .makeNightOrder($saveData, $username, $saveName)
-.'<li class="generated-by">this almanac generated using <a href="<?= SITE_ROOT ?>">Bloodstar Clocktica</a></li>'
-.'<li class="donate"><span>Enjoying Bloodstar? Buy me a coffee!</span><form action="https://www.paypal.com/donate" method="post" target="_top">
-    <input type="hidden" name="business" value="XETJMX9JKLGKQ" />
-    <input type="hidden" name="no_recurring" value="0" />
-    <input type="hidden" name="item_name" value="I shared Bloodstar for BotC fans to use for free, but any help with the costs for storing all those images is appreciated!" />
-    <input type="hidden" name="currency_code" value="USD" />
-    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-    <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
-    </form></li>'
+.'<li class="generated-by">this almanac generated using <a href="'. SITE_ROOT .'">Bloodstar Clocktica</a></li>'
+.'<li class="donate"><span>Enjoying Bloodstar? Donate to help with hosting!</span><a href="https://ko-fi.com/tsubashi" target="_blank"><img alt="Donate!" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" /></a></li>'
 .'</ol></div></body></html>';
     }
 
