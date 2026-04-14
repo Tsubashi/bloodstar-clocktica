@@ -6,3 +6,16 @@
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Other
+node_modules/
+*.d.ts
+.htpasswd
+.htaccess
+dist/*.html
+dist/*.css
+dist/*.js
+dist/fonts/
+dist/*.js.LICENSE.txt
+persistent/
+.env
