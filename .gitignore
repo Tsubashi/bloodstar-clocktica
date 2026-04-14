@@ -1,13 +1,8 @@
-node_modules/
-ftpinfo.json
-*.d.ts
-.htpasswd
-.htaccess
-bloodstar.xyz/dist/*.html
-bloodstar.xyz/dist/*.css
-bloodstar.xyz/dist/*.js
-bloodstar.xyz/dist/fonts/
-bloodstar.xyz/dist/*.js.LICENSE.txt
-bloodstar.xyz/persistent/
-bloodstar.xyz/.env
-phpmyadmininfo
+# Yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
