@@ -22,3 +22,6 @@ persistent/
 
 # MAC
 .DS_Store
+
+# AI
+.claude

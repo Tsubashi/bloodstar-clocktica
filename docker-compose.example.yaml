@@ -22,7 +22,7 @@ services:
         target: /etc/nginx/conf.d/default.conf
       - type: bind
         source: persistent/config/php.ini
-        target: /usr/local/etc/php/conf.d/custom.ini
+        target: /etc/php85/conf.d/settings.ini
       - type: bind
         source: persistent/protected
         target: /var/www/protected
