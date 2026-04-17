@@ -19,3 +19,6 @@ dist/fonts/
 dist/*.js.LICENSE.txt
 persistent/
 .env
+
+# MAC
+.DS_Store
