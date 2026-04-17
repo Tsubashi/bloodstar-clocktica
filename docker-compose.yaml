@@ -21,7 +21,7 @@ services:
         source: persistent/published
         target: /var/www/html/p
 
-  bloodstar:
+  app:
     restart: always
     build: .
     environment:
