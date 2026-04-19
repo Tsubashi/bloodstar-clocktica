@@ -1,6 +1,6 @@
 <?php
     $maxEditions = 30;
-    $maxCharacters = 50;
+    $maxCharacters = 200;
     header('Content-Type: application/json;');
     require_once('shared.php');
     requirePost();
@@ -10,11 +10,6 @@
 
     $username = $tokenPayload['username'];
     validateUsername($username);
-    $bigLimitUsername = "Poria";
-    $isBigLimit = ($username == $bigLimitUsername) ?? false;
-    if ($isBigLimit) {
-        $maxEditions = 90;
-    }
 
     $clobber = optionalField($request, 'clobber', false);
     validateBoolean($clobber);
