@@ -1,0 +1,47 @@
+# This is an example docker-compose file for running Bloodstar Clocktica. It is currently written
+# to be run in-tree, but we don't recommend doing this for production deployments. Instead, you should copy
+# just this file and modify it to match your environment.
+services:
+  app:
+    restart: always
+    image: tsubashi/bloodstar:latest
+    ports:
+      - protocol: "tcp"
+        target: 80
+        published: ${WEB_PORT}
+        mode: host
+    environment:
+      - EMAIL_HOST=${EMAIL_HOST}
+      - EMAIL_PORT=${EMAIL_PORT}
+      - EMAIL_USER=${EMAIL_USER}
+      - EMAIL_PASS=${EMAIL_PASS}
+      - EMAIL_FROM=${EMAIL_FROM}
+    volumes:
+      - type: bind
+        source: persistent/config/nginx.conf
+        target: /etc/nginx/conf.d/default.conf
+      - type: bind
+        source: persistent/config/php.ini
+        target: /etc/php85/conf.d/settings.ini
+      - type: bind
+        source: persistent/protected
+        target: /var/www/protected
+      - type: bind
+        source: persistent/usersave
+        target: /var/www/html/usersave
+      - type: bind
+        source: persistent/published
+        target: /var/www/html/p
+
+  db:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: bloodstar_db
+      MYSQL_USER: bloodstar_user
+      MYSQL_PASSWORD: ${MYSQL_USER_PASSWORD}
+    volumes:
+      - type: bind
+        source: persistent/db_data
+        target: /var/lib/mysql

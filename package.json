@@ -1,0 +1,34 @@
+{
+  "name": "bloodstarclocktica",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./src/bloodstar.ts",
+  "scripts": {
+    "builddev": "webpack --mode development",
+    "buildprod": "webpack --mode production",
+    "watch": "webpack --mode development --watch",
+    "serve": "live-server --cors --port=8085 ./dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.30.0",
+    "@typescript-eslint/parser": "^4.30.0",
+    "css-loader": "^6.2.0",
+    "css-minimizer-webpack-plugin": "^3.0.2",
+    "eslint": "^7.32.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.3.2",
+    "jszip": "^3.7.1",
+    "live-server": "^1.2.0",
+    "mini-css-extract-plugin": "^2.2.2",
+    "npm-run-all": "^4.1.5",
+    "style-loader": "^3.2.1",
+    "ts-loader": "^9.2.5",
+    "typescript": "^4.4.2",
+    "webpack": "^5.51.2",
+    "webpack-cli": "^4.8.0"
+  },
+  "packageManager": "yarn@4.13.0"
+}
