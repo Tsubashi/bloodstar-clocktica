@@ -36,11 +36,6 @@ services:
   db:
     image: mariadb:latest
     restart: always
-    ports:
-      - protocol: "tcp"
-        target: 3306
-        published: 3306
-        host_ip: "127.0.0.1"
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: bloodstar_db
