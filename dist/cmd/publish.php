@@ -129,7 +129,7 @@
                 if (preg_match("/^data:$/", $inMeta['logo'])) {
                     $outMeta['logo'] = $inMeta['logo'];
                 } else {
-                    $outMeta['logo'] = 'https://bloodstar.18m250.org/p/'.$saveName.'/_meta.png';
+                    $outMeta['logo'] = 'https://bloodstar.clocktica.com/p/'.$saveName.'/_meta.png';
                 }
             }
 
@@ -161,7 +161,7 @@
                     if (preg_match("/^data:$/", $inCharacter['styledImage'])) {
                         $outCharacter['image'] = $inCharacter['styledImage'];
                     } else {
-                        $outCharacter['image'] = 'https://bloodstar.18m250.org/p/'.$saveName.'/'.$id.'.png';
+                        $outCharacter['image'] = 'https://bloodstar.clocktica.com/p/'.$saveName.'/'.$id.'.png';
                     }
                 }
 
