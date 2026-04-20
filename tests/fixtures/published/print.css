@@ -1,0 +1,302 @@
+html,body{font-size:8pt}
+body{
+    font-family:'PT Serif', serif;
+    text-align:justify;
+    overflow-x:hidden;
+}
+table{
+    border:1px solid rgba(51,51,51,0.35);
+    margin:0 auto;
+}
+a{text-decoration:none;color:#006}
+h1, h2, h3, h4, h5, h6, h7 {
+    margin:0.2rem 0 0.2rem 0;
+    font-family: 'Nova Script', cursive;
+    text-transform:uppercase;
+}
+h1, h2{font-size:2.4rem}
+h3, h4, h5, h6, h7 {font-size:1.2rem}
+hr{width:80%;border:0.25mm solid}
+ol, ul {list-style:none;}
+.nav {display:none;}
+.almanac-viewport {
+    margin:0;
+    padding:0;
+}
+.page {
+    position: relative;
+    page-break-after: always;
+    page-break-inside: avoid;
+    break-after: always;
+}
+.page img{
+    max-width:90vw;
+}
+.page-contents{
+    margin:auto;
+    display:flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+#synopsis > .page-contents > p,
+#overview > .page-contents > p,
+#changelog > .page-contents > p {
+    width:60%;
+}
+
+.generated-by{
+  display:none;
+}
+.team{
+    font-family: 'MedievalSharp', cursive;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    text-transform: uppercase;
+    position: absolute;
+    top: 4.8rem;
+    left: 1.6rem;
+    letter-spacing: -0.4rem;
+    width: unset;
+    font-size: 1.8rem;
+    margin:0;
+}
+p{
+    margin-top:0.4rem;
+    margin-bottom:0.4rem;
+}
+.inline-logo{
+    float:left;
+    margin:-0.4rem 0.4rem 0 -3.2rem;
+    width:6.4rem;
+}
+#synopsis > .page-contents{
+    font-family: 'MedievalSharp', cursive;
+    color:#933;
+}
+.ability{
+    width:60%;
+    font-family:'Roboto Condensed',sans-serif;
+    text-align:center;
+    font-size:1.2rem;
+}
+.flavor{
+    width:60%;
+    font-style:italic;
+    color:#704c29;
+    text-align:center;
+    font-size:0.8rem;
+}
+.overview, .example, .how-to-run {
+    width:80%;
+}
+.tip > p {
+    width:80%;
+    color:#933;
+    padding:5mm;
+    border:1mm solid #933;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/* big letter */
+#synopsis > .page-contents > p:nth-child(1)::first-letter {
+    font-size:2rem;
+}
+.overview > p:nth-child(1)::first-letter {
+    font-family: 'MedievalSharp', cursive;
+    font-size: 5rem;
+    float:left;
+    line-height:0.7;
+    margin: 0 0.3rem 0 -0.4rem;
+}
+.overview > p:nth-child(1) {
+    min-height: 3.5rem;
+}
+
+/* bullets */
+.overview > p + p {
+    position:relative;
+    margin-left:1.3rem;
+}
+.overview > p + p::before {
+    content:'•';
+    font-size:1.4rem;
+    position:absolute;
+    line-height:0.9;
+    top:0;
+    left:-1.4rem;
+}
+
+/*paper effect*/
+/*.page::before{background-image:url('/img/paper.png');}
+.page::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    right:0;
+    bottom:0;
+    box-shadow:0 0 4.5rem #966e49 inset;
+    z-index:-1;
+}*/
+
+.townsfolk h1,
+.townsfolk h2,
+.townsfolk h3,
+.townsfolk h4,
+.townsfolk h5,
+.townsfolk h6,
+.townsfolk .ability,
+.townsfolk .team,
+.townsfolk .overview > p:nth-child(1)::first-letter,
+.townsfolk .overview > p + p::before {
+    color:#003fb2;
+}
+.townsfolk hr {
+    border-color:#003fb2;
+}
+
+.outsider h1,
+.outsider h2,
+.outsider h3,
+.outsider h4,
+.outsider h5,
+.outsider h6,
+.outsider .ability,
+.outsider .team,
+.outsider .overview > p:nth-child(1)::first-letter,
+.outsider .overview > p + p::before {
+    color:#006893;
+}
+.outsider hr {
+    border-color:#006893;
+}
+
+.minion h1,
+.minion h2,
+.minion h3,
+.minion h4,
+.minion h5,
+.minion h6,
+.minion .ability,
+.minion .team,
+.minion .overview > p:nth-child(1)::first-letter,
+.minion .overview > p + p::before {
+    color:#9f0000;
+}
+.minion hr {
+    border-color:#9f0000;
+}
+
+.demon h1,
+.demon h2,
+.demon h3,
+.demon h4,
+.demon h5,
+.demon h6,
+.demon .ability,
+.demon .team,
+.demon .overview > p:nth-child(1)::first-letter,
+.demon .overview > p + p::before {
+    color:#940000;
+}
+.demon hr {
+    border-color:#940000;
+}
+
+.traveler h1,
+.traveler h2,
+.traveler h3,
+.traveler h4,
+.traveler h5,
+.traveler h6,
+.traveler .ability,
+.traveler .team,
+.traveler .overview > p:nth-child(1)::first-letter,
+.traveler .overview > p + p::before {
+    color:#553412;
+}
+.traveler hr {
+    border-color:#553412;
+}
+
+.traveller h1,
+.traveller h2,
+.traveller h3,
+.traveller h4,
+.traveller h5,
+.traveller h6,
+.traveller .ability,
+.traveller .team,
+.traveller .overview > p:nth-child(1)::first-letter,
+.traveller .overview > p + p::before {
+    color:#553412;
+}
+.traveller hr {
+    border-color:#553412;
+}
+
+.fabled h1,
+.fabled h2,
+.fabled h3,
+.fabled h4,
+.fabled h5,
+.fabled h6,
+.fabled .ability,
+.fabled .team,
+.fabled .overview > p:nth-child(1)::first-letter,
+.fabled .overview > p + p::before {
+    color:#553412;
+}
+.fabled hr {
+    border-color:#553412;
+}
+
+.jinxes h1,
+.jinxes h2,
+.jinxes h3,
+.jinxes h4,
+.jinxes h5,
+.jinxes h6,
+.jinxes .ability,
+.jinxes .team,
+.jinxes .overview > p:nth-child(1)::first-letter,
+.jinxes .overview > p + p::before {
+    color:#333;
+}
+.jinxes hr {
+    border-color:#333;
+}
+
+.characterImage {
+    max-width:12rem;
+    max-height:12rem;
+    margin-bottom: -4rem;
+}
+
+.nightOrder {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 80%;
+}
+.nightOrderList {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+}
+.nightOrderListName {
+    font-size:1.2rem;
+}
+.nightOrderListIcon {
+    max-width: 15mm;
+    max-height: 15mm;
+    justify-self: end;
+    margin-bottom: -3mm;
+}
+.firstNightColumn {
+    align-self: start;
+}
+.otherNightsColumn {
+    /*transform:rotate(180deg);*/
+    align-self: end;
+}
