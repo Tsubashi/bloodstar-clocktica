@@ -7,7 +7,7 @@
         <meta name="theme-color" content="#000000" />
         <!-- <link rel="manifest" href="./manifest.json" /> -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
         <title>Bloodstar Clocktica</title>
     </head>
 <body>
@@ -56,8 +56,8 @@
             <div class="dropdown" tabindex="0">
                 Info
                 <div class="dropdownContent">
-                    <a href="https://bitbucket.org/excitemike/bloodstarclocktica" target="_blank">Source code</a>
-                    <span style="white-space: nowrap;">updated: 2025.01.25</span>
+                    <a href="https://github.com/Tsubashi/bloodstar-clocktica" target="_blank">Source code</a>
+                    <span style="white-space: nowrap;">Built: {unspecified}</span>
                 </div>
             </div>
             <div id="windowTitle"></div>
@@ -120,12 +120,12 @@
                             <div class="twoColumnGrid">
                                 <label for="metaSynopsis" title="Markdown supported! Intro text for set's almanac. Markdown supported!">Synopsis</label>
                                 <div class="autogrowWrap">
-                                    <textarea 
+                                    <textarea
                                         name="metaSynopsis"
                                         id="metaSynopsis"
                                         title="Markdown supported! Intro text for set's almanac."
                                         spellcheck="true"
-                                        rows="1" 
+                                        rows="1"
                                         oninput="this.parentNode.dataset.replicatedValue = this.value"></textarea>
                                 </div>
                                 <label for="metaOverview" title="Markdown supported! Describe what it's like to play this edition.">Overview</label>
@@ -199,47 +199,47 @@
                                         <label for="sizeFactor" title="Adjust image size.">Size</label>
                                         <input type="range" name="sizeFactor" id="sizeFactor" min="0" max="1" step="0.05" title="Adjust image size.">
                                         <label id="sizeFactorValueLabel" for="sizeFactor" data-places="2"></label>
-                                        
+
                                         <label for="shouldCrop">Crop</label>
                                         <input type="checkbox" name="crop" id="shouldCrop" title="Whether to crop the image to just the visible area.">
                                         <div></div>
-                                        
+
                                         <label for="shouldColorize">Colorize</label>
                                         <input type="checkbox" name="shouldColorize" id="shouldColorize" title="Whether to recolor the image based on team.">
                                         <div></div>
-                                        
+
                                         <label for="useOutsiderAndMinionColors" title="If checked, Outsiders and Minions get their own colors instead of using just blue/red for Good/Evil colors.">Outsider/Minion Colors</label>
                                         <input type="checkbox" name="useOutsiderAndMinionColors" id="useOutsiderAndMinionColors" title="If checked, Outsiders and Minions get their own colors instead of using just blue/red for Good/Evil colors.">
                                         <div></div>
-                                        
+
                                         <label for="useTexture" title="If checked, a grunge texture is applied to the image.">Texture</label>
                                         <input type="checkbox" name="useTexture" id="useTexture" title="If checked, a grunge texture is applied to the image.">
                                         <div></div>
-                                        
+
                                         <label for="useBorder" title="Whether a border should be added to the image.">Border</label>
                                         <input type="checkbox" name="useBorder" id="useBorder" title="Whether a border should be added to the image.">
                                         <div></div>
-                                        
+
                                         <label for="borderIntensity" title="Scales the border effect.">Border Intensity</label>
                                         <input type="range" name="borderIntensity" id="borderIntensity" min="0" max="5" step="1" title="Scales the border effect.">
                                         <label id="borderIntensityValueLabel" for="borderIntensity"></label>
-                                        
+
                                         <label for="dropShadow" title="Whether to add a drop shadow effect to the image.">Drop Shadow</label>
                                         <input type="checkbox" name="dropShadow" id="dropShadow" title="Whether to add a drop shadow effect to the image.">
                                         <div></div>
-                                        
+
                                         <label for="dropShadowSize" title="How much the dropshadow spreads.">Dropshadow Size</label>
                                         <input type="range" name="dropShadowSize" id="dropShadowSize" min="0" max="32" step="1" title="How much the dropshadow spreads.">
                                         <label id="dropShadowSizeValueLabel" for="dropShadowSize"></label>
-                                        
+
                                         <label for="dropShadowOffsetX" title="Horizontal offset of the dropshadow effect.">Dropshadow Offset X</label>
                                         <input type="range" name="dropShadowOffsetX" id="dropShadowOffsetX" min="-20" max="20" step="1" title="Horizontal offset of the dropshadow effect.">
                                         <label id="dropShadowOffsetXValueLabel" for="dropShadowOffsetX"></label>
-                                        
+
                                         <label for="dropShadowOffsetY" title="Vertical offset of the dropshadow effect.">Dropshadow Offset Y</label>
                                         <input type="range" name="dropShadowOffsetY" id="dropShadowOffsetY" min="-20" max="20" step="1" title="Vertical offset of the dropshadow effect.">
                                         <label id="dropShadowOffsetYValueLabel" for="dropShadowOffsetY"></label>
-                                        
+
                                         <label for="dropShadowOpacity" title="Opacity of the dropshadow effect: 0=invisible, 1=fully opaque.">Dropshadow Opacity</label>
                                         <input type="range" name="dropShadowOpacity" id="dropShadowOpacity" min="0" max="1" step="0.05" title="Opacity of the dropshadow effect: 0=invisible, 1=fully opaque.">
                                         <label id="dropShadowOpacityValueLabel" for="dropShadowOpacity" data-places="2"></label>
@@ -255,7 +255,7 @@
                             <div class="twoColumnGrid">
                                 <label for="characterName" title="The displayed name of this character.">Name</label>
                                 <input type="text" name="characterName" id="characterName" title="The displayed name of this character.">
-        
+
                                 <label for="characterTeam" title="The team of the character.">Team</label>
                                 <select name="characterTeam" id="characterTeam" title="The team of the character.">
                                     <option value="townsfolk">Townsfolk</option>
@@ -266,7 +266,7 @@
                                     <option value="fabled">Fabled</option>
                                     <option value="jinxes">Jinxes</option>
                                 </select>
-        
+
                                 <label for="characterAbility" title="The displayed ability text of the character.">Ability</label>
                                 <input type="text" name="characterAbility" id="characterAbility" title="The displayed ability text of the character.">
 
