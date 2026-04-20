@@ -58,12 +58,14 @@
             }
         }
 
-        $suffix = $isSource ? '.src.png' : '.png';
+        $suffix = $isSource ? '.src.png.temp' : '.png.temp';
 
         $path = join_paths($editionFolder, $id.$suffix);
 
         try {
+            # write to a temp file and then rename to make sure we break hard links
             file_put_contents($path, $binaryData);
+            rename($path, join_paths($editionFolder, $id.($isSource ? '.src.png' : '.png')));
         } catch (Exception $e) {
             echo json_encode(array('error' =>"error writing file '$saveName'"));
             exit();

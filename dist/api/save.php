@@ -40,6 +40,7 @@
             }
         }
         $editionFilePath = join_paths($editionFolder, 'edition');
+        $editionFilePathTemp = join_paths($editionFolder, 'edition.temp');
 
         if (!$clobber && file_exists($editionFilePath)) {
             echo '"clobber"';
@@ -47,7 +48,9 @@
         }
 
         try {
-            file_put_contents($editionFilePath, json_encode($data));
+            # write to a temp file and then rename to make sure we break hard links
+            file_put_contents($editionFilePathTemp, json_encode($data));
+            rename($editionFilePathTemp, $editionFilePath);
         } catch (Exception $e) {
             echo json_encode(array('error' =>"error writing file '$saveName'"));
             exit();
