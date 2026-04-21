@@ -7,7 +7,14 @@
     "builddev": "webpack --mode development",
     "buildprod": "webpack --mode production",
     "watch": "webpack --mode development --watch",
-    "serve": "live-server --cors --port=8085 ./dist"
+    "serve": "live-server --cors --port=8085 ./dist",
+    "test": "echo 'Unit tests arrive in Phase 2 (Vitest).' && exit 0",
+    "test:api": "echo 'API tests arrive in Phase 3 (Hurl).' && exit 0",
+    "test:e2e": "echo 'E2E tests arrive in Phase 4 (Playwright).' && exit 0",
+    "test:e2e:ui": "echo 'E2E UI mode arrives in Phase 4 (Playwright).' && exit 0",
+    "test:all": "npm run test && npm run test:api && npm run test:e2e",
+    "test:stack:up": "./scripts/test-stack.sh up",
+    "test:stack:down": "./scripts/test-stack.sh down"
   },
   "keywords": [],
   "author": "",
