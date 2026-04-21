@@ -1,4 +1,6 @@
 <?php
+    // TODO: sibling endpoints (signin.php, etc.) send `application/json;` with a
+    // trailing semicolon. Align this file or strip the semicolon from siblings.
     header('Content-Type: application/json');
 
     try {

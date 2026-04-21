@@ -72,6 +72,10 @@
     }
 
     // error if field is not set in array, otherwise, return that field
+    // TODO: this emits HTTP 200 + `{"error": ...}` on the failure path instead
+    // of a 4xx/5xx, and the echo+exit bypasses any caller's try/catch. Callers
+    // that need a non-200 status (e.g., /api/health.php) must currently check
+    // keys themselves before calling through.
     function requireField($arr, $fieldName) {
         if (array_key_exists($fieldName, $arr))
         {
