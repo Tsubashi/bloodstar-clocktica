@@ -14,9 +14,12 @@ wait_for_health() {
   local delay=2
   echo "Waiting for $service to become healthy..."
   for i in $(seq 1 "$retries"); do
-    local status
-    status=$("${COMPOSE[@]}" ps --format json "$service" \
-      | awk -F'"Health":"' 'NF>1{split($2,a,"\""); print a[1]; exit}')
+    local cid
+    cid=$("${COMPOSE[@]}" ps -q "$service" 2>/dev/null || true)
+    local status=""
+    if [ -n "$cid" ]; then
+      status=$(docker inspect --format '{{.State.Health.Status}}' "$cid" 2>/dev/null || true)
+    fi
     if [ "$status" = "healthy" ]; then
       echo "$service is healthy"
       return 0
