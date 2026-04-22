@@ -242,6 +242,9 @@ export function boundsCheck(i:unknown, arr:ArrayLike<unknown>):boolean {
 }
 
 /** test whether you have a thing with string keys */
+// TODO: returns true for arrays (typeof [] === 'object'), but the `x is
+// Record<string, unknown>` predicate claims to narrow to plain records.
+// Callers using this as a type guard will treat arrays as records.
 export function isRecord(x:unknown): x is Record<string, unknown> {
     if (x === null) {return false;}
     switch (typeof x) {

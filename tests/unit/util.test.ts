@@ -71,6 +71,9 @@ describe('isRecord', () => {
 });
 
 describe('getOrdinalString', () => {
+  // The 111/112/113 rows document a known bug: the teens exception only fires
+  // for n === 11/12/13 exactly, not for n % 100. See TODO in src/util.ts.
+  // When the bug is fixed, flip those three rows to '111th'/'112th'/'113th'.
   it.each([
     [1, '1st'],
     [2, '2nd'],
