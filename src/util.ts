@@ -178,6 +178,9 @@ export function showHideElement(element:Element, visible:boolean):void {
 }
 
 /** ordinal string based on number */
+// TODO: the 11/12/13 -> 'th' exception only fires for n === 11/12/13, not for
+// any number ending in those two digits. So 111 -> '111st' instead of '111th',
+// 212 -> '212nd' instead of '212th', etc. The canonical rule is `n % 100`.
 export function getOrdinalString(n:number):string {
     if (n <= 0) { return n.toFixed(0); }
     switch (n)
