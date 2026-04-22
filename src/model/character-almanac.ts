@@ -2,7 +2,7 @@
  * Model for character almanac data
  * @module CharacterAlmanac
  */
-import {Property} from '../bind/bindings';
+import {Property} from '../bind/base-binding';
 import {ObservableObject, observableProperty} from '../bind/observable-object';
 
 export class CharacterAlmanac extends ObservableObject<CharacterAlmanac> {

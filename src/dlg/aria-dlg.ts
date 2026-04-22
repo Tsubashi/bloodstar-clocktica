@@ -367,11 +367,13 @@ export async function showDialog<ResultType = unknown>(
 }
 
 // escape to cancel current dialog
-document.addEventListener('keyup', (event:KeyboardEvent) => {
-    if (event.code !== 'Escape') {return;}
-    const dlg = getCurrentDialog();
-    if (!dlg) {return;}
-    if (dlg.tryCancel()) {
-        event.stopPropagation();
-    }
-});
+if (typeof document !== 'undefined') {
+    document.addEventListener('keyup', (event:KeyboardEvent) => {
+        if (event.code !== 'Escape') {return;}
+        const dlg = getCurrentDialog();
+        if (!dlg) {return;}
+        if (dlg.tryCancel()) {
+            event.stopPropagation();
+        }
+    });
+}

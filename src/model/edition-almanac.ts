@@ -2,7 +2,7 @@
  * Model for edition almanac data
  * @module EditionAlmanac
  */
-import {Property} from '../bind/bindings';
+import {Property} from '../bind/base-binding';
 import {ObservableObject, observableProperty} from '../bind/observable-object';
 
 export class EditionAlmanac extends ObservableObject<EditionAlmanac> {

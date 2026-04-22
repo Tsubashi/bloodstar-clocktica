@@ -2,7 +2,7 @@
  * model for character image settings data
  * @module CharacterImageSettings
  */
-import { Property } from '../bind/bindings';
+import { Property } from '../bind/base-binding';
 import {ObservableObject, observableProperty} from '../bind/observable-object';
 import { ProcessImageSettings } from '../blood-image';
 

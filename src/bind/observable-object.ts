@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DisplayValuePairs, EnumProperty, Property } from "./bindings";
+import { DisplayValuePairs, EnumProperty, Property } from "./base-binding";
 import { ObservableCollection } from "./observable-collection";
 
 export type PropKey<T> = string & keyof T;

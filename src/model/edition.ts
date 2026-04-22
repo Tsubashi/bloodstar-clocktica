@@ -2,7 +2,7 @@
  * Model for edition data
  * @module Edition
  */
-import {Property} from '../bind/bindings';
+import {Property} from '../bind/base-binding';
 import {spinner} from '../dlg/spinner-dlg';
 import {Character} from './character';
 import {EditionAlmanac} from './edition-almanac';
