@@ -25,3 +25,7 @@ hurl --test \
   --variables-file tests/api/env.test \
   --report-html tests/api/.hurl-report \
   tests/api/**/*.hurl
+
+# Verify every test cleaned up its scratch users / editions / published files.
+# Catches slipped teardowns that would otherwise accumulate silently.
+./scripts/test-stack.sh leak-check

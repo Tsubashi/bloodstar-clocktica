@@ -49,8 +49,8 @@
     try {
         $userSaveDir = join_paths('../usersave', $username);
         deleteDirectory($userSaveDir);
-        $publishDir = join_paths('../usersave', $username);
-        deleteDirectory($userSaveDir);
+        $publishDir = join_paths('../p', $username);
+        deleteDirectory($publishDir);
     } catch (Exception $e) {
         echo json_encode(['error'=>'Error deleting user data']);
         exit();

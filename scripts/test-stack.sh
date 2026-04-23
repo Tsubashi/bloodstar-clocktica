@@ -53,10 +53,61 @@ cmd_wait() {
   wait_for_health
 }
 
+# Verify no scratch users or edition artifacts leaked after a test run.
+# Exits non-zero if anything persists. Safe to call with stack running.
+cmd_leak_check() {
+  local leaked=0
+
+  # DB tables: should all be empty after teardowns ran.
+  local tables="users hash unconfirmed reset share block"
+  for tbl in $tables; do
+    local count
+    count=$("${COMPOSE[@]}" exec -T db mariadb \
+      -ubloodstar_user -pbloodstar_test_password bloodstar_db \
+      -sN -e "SELECT COUNT(*) FROM \`$tbl\`;" 2>/dev/null | tr -d '[:space:]')
+    if [ -z "$count" ]; then
+      echo "LEAK CHECK: could not read row count for $tbl" >&2
+      leaked=1
+    elif [ "$count" != "0" ]; then
+      echo "LEAK CHECK: $tbl has $count row(s) remaining" >&2
+      leaked=1
+    fi
+  done
+
+  # Filesystem: user-save dirs should be gone (deleteaccount.php handles this).
+  local usersave_count
+  usersave_count=$("${COMPOSE[@]}" exec -T app \
+    sh -c 'find /var/www/html/usersave -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l' \
+    | tr -d '[:space:]')
+  if [ -n "$usersave_count" ] && [ "$usersave_count" != "0" ]; then
+    echo "LEAK CHECK: /var/www/html/usersave has $usersave_count user dir(s) remaining" >&2
+    leaked=1
+  fi
+
+  # Filesystem: published dirs should be gone. Known caveat: deleteaccount.php
+  # only removes usersave, not /p/. If this leaks, either the test explicitly
+  # calls delete.php before deleteaccount, or we fix deleteaccount.php to
+  # clean up /p/<username>/ too.
+  local published_count
+  published_count=$("${COMPOSE[@]}" exec -T app \
+    sh -c 'find /var/www/html/p -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l' \
+    | tr -d '[:space:]')
+  if [ -n "$published_count" ] && [ "$published_count" != "0" ]; then
+    echo "LEAK CHECK: /var/www/html/p has $published_count user dir(s) remaining" >&2
+    leaked=1
+  fi
+
+  if [ "$leaked" -ne 0 ]; then
+    return 1
+  fi
+  echo "Leak check: clean (DB tables empty, usersave empty, published empty)"
+}
+
 case "${1:-}" in
-  up)    cmd_up ;;
-  down)  cmd_down ;;
-  wait)  cmd_wait ;;
-  logs)  shift; cmd_logs "$@" ;;
-  *)     echo "usage: $0 {up|down|wait|logs [service]}" >&2; exit 2 ;;
+  up)         cmd_up ;;
+  down)       cmd_down ;;
+  wait)       cmd_wait ;;
+  logs)       shift; cmd_logs "$@" ;;
+  leak-check) cmd_leak_check ;;
+  *)          echo "usage: $0 {up|down|wait|logs [service]|leak-check}" >&2; exit 2 ;;
 esac

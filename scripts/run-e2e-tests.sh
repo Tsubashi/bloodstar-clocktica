@@ -16,3 +16,6 @@ trap cleanup EXIT
 curl -fsS -X DELETE http://localhost:8026/api/v1/messages > /dev/null
 
 npx playwright test "$@"
+
+# Verify every spec cleaned up its scratch users / editions / published files.
+./scripts/test-stack.sh leak-check
