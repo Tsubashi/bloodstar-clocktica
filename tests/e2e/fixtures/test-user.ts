@@ -64,14 +64,33 @@ export async function createTestUser(
   return { username, email, password, session };
 }
 
-/** Delete the scratch account via the API. Safe to call in teardown. */
+/** Delete the scratch account via the API. Safe to call in teardown.
+ *  Logs a warning (does NOT throw) so teardown failures don't mask the
+ *  spec's real error, but leaked users become visible in the test output.
+ */
 export async function deleteTestUser(
   request: APIRequestContext,
   user: TestUser,
 ): Promise<void> {
-  await request.post(`${BASE_URL}/api/deleteaccount.php`, {
-    data: { token: user.session.token, password: user.password },
-  });
+  try {
+    const res = await request.post(`${BASE_URL}/api/deleteaccount.php`, {
+      data: { token: user.session.token, password: user.password },
+    });
+    if (res.status() !== 200) {
+      console.warn(
+        `[test-user] deleteaccount non-200 (${res.status()}) for ${user.username}: ${await res.text().catch(() => '<unreadable>')}`,
+      );
+      return;
+    }
+    const body = (await res.text()).trim();
+    if (body !== 'true') {
+      console.warn(
+        `[test-user] deleteaccount unexpected body for ${user.username}: ${body}`,
+      );
+    }
+  } catch (err) {
+    console.warn(`[test-user] deleteaccount threw for ${user.username}: ${err}`);
+  }
 }
 
 /**

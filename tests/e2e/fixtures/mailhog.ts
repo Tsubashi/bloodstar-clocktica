@@ -35,11 +35,16 @@ export async function getLatestEmailTo(recipient: string, timeoutMs = 10_000): P
   throw new Error(`No mailhog message for ${recipient} within ${timeoutMs}ms`);
 }
 
-/** Extract the 6-digit code from an email body. */
+/** Extract the 6-digit code from an email body. Scoped via "code" keyword
+ *  so we don't accidentally pick up unrelated 6-digit substrings (years,
+ *  phone numbers, etc.) if the template grows. */
 export function extract6DigitCode(body: string): string {
-  const match = body.match(/\b(\d{6})\b/);
-  if (!match) throw new Error(`No 6-digit code in body: ${body.slice(0, 200)}`);
-  return match[1];
+  const contextual = body.match(/code[^\d]{0,40}(\d{6})/i);
+  if (contextual) return contextual[1];
+  // Fallback: plain 6-digit match for older template variants.
+  const fallback = body.match(/\b(\d{6})\b/);
+  if (!fallback) throw new Error(`No 6-digit code in body: ${body.slice(0, 200)}`);
+  return fallback[1];
 }
 
 /** Clear mailhog's inbox. Useful in beforeEach for isolation. */

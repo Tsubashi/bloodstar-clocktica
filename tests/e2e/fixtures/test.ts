@@ -14,8 +14,15 @@ const LOCAL_ORIGIN = 'http://localhost:8086';
 export const test = base.extend({
   page: async ({ page }, use) => {
     await page.route(`${PROD_ORIGIN}/**`, async (route) => {
-      const url = route.request().url().replace(PROD_ORIGIN, LOCAL_ORIGIN);
-      const response = await route.fetch({ url });
+      const req = route.request();
+      const url = req.url().replace(PROD_ORIGIN, LOCAL_ORIGIN);
+      const response = await route.fetch({
+        url,
+        method: req.method(),
+        headers: req.headers(),
+        postData: req.postDataBuffer() ?? undefined,
+        maxRedirects: 0,
+      });
       await route.fulfill({ response });
     });
     await use(page);
