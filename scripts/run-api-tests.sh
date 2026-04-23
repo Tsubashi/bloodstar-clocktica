@@ -11,6 +11,7 @@ trap cleanup EXIT
 ./scripts/test-stack.sh up
 
 hurl --test \
+  --jobs 1 \
   --variables-file tests/api/env.test \
   --report-html tests/api/.hurl-report \
   tests/api/**/*.hurl

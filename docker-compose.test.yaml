@@ -39,6 +39,8 @@ services:
         condition: service_healthy
       published-seed:
         condition: service_completed_successfully
+      usersave-init:
+        condition: service_completed_successfully
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:8080/api/health.php"]
       interval: 5s
@@ -79,10 +81,11 @@ services:
     image: alpine:3.21
     # Runs before app (depends_on: service_completed_successfully) and always
     # overwrites so updated fixture CSS wins on the next `up`.
+    # Also sets ownership so PHP (nobody, uid 65534) can create user subdirs.
     command:
       - sh
       - -c
-      - "cp -f /seed/*.css /target/ && ls -la /target/"
+      - "cp -f /seed/*.css /target/ && chown 65534:65534 /target && ls -la /target/"
     volumes:
       - type: bind
         source: ./tests/fixtures/published
@@ -91,6 +94,19 @@ services:
       - type: volume
         source: test_published
         target: /target
+    restart: "no"
+
+  usersave-init:
+    image: alpine:3.21
+    # Set ownership of the usersave volume so PHP (nobody, uid 65534) can write.
+    command:
+      - sh
+      - -c
+      - "chown 65534:65534 /usersave"
+    volumes:
+      - type: volume
+        source: test_usersave
+        target: /usersave
     restart: "no"
 
 volumes:
