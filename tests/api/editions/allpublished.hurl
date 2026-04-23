@@ -39,6 +39,10 @@ HTTP 200
 [Asserts]
 jsonpath "$" isCollection
 jsonpath "$" count >= 1
+# The just-published URL must appear in the result. allpublished.php
+# returns an array of [script_url, almanac_url] pairs; our script URL
+# should be the first element of some pair.
+jsonpath "$[*][0]" contains "{{my_script_url}}"
 
 # Teardown
 POST {{base_url}}/api/deleteaccount.php

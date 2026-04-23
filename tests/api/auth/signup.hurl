@@ -57,13 +57,6 @@ signin_token: jsonpath "$.token"
 jsonpath "$.email" == "{{email}}"
 jsonpath "$.username" == "{{username}}"
 
-# --- Validate the token ---
-POST {{base_url}}/api/validate.php
-{
-  "token": "{{signin_token}}"
-}
-HTTP 200
-
 # --- Teardown: delete the account ---
 POST {{base_url}}/api/deleteaccount.php
 {

@@ -58,6 +58,12 @@ HTTP 200
 [Asserts]
 jsonpath "$.error" exists
 
+# TODO(authz): unshare.php and delete.php scope by the caller's token
+# rather than the saveName's owner, so a non-owner call silently operates
+# on the caller's own (empty) save namespace. If either endpoint is ever
+# hardened to reject non-owner callers, these two `body == "true"` asserts
+# must flip to `jsonpath "$.error" exists`.
+
 # --- Sharee tries unshare: observed behavior = silent true (scoped to sharee's own editions) ---
 POST {{base_url}}/api/unshare.php
 {"token":"{{sharee_token}}","saveName":"shared-edition","user":"{{owner_username}}"}
