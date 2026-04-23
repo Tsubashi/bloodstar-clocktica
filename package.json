@@ -10,8 +10,8 @@
     "serve": "live-server --cors --port=8085 ./dist",
     "test": "vitest run",
     "test:api": "./scripts/run-api-tests.sh",
-    "test:e2e": "echo 'E2E tests arrive in Phase 4 (Playwright).' && exit 0",
-    "test:e2e:ui": "echo 'E2E UI mode arrives in Phase 4 (Playwright).' && exit 0",
+    "test:e2e": "./scripts/run-e2e-tests.sh",
+    "test:e2e:ui": "./scripts/test-stack.sh up && npx playwright test --ui; ./scripts/test-stack.sh down",
     "test:all": "npm run test && npm run test:api && npm run test:e2e",
     "test:stack:up": "./scripts/test-stack.sh up",
     "test:stack:down": "./scripts/test-stack.sh down"
@@ -20,6 +20,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
     "css-loader": "^6.2.0",
