@@ -35,13 +35,7 @@ test('save-as creates a named copy', async ({ request, page }) => {
     await expect(dialog).toBeVisible();
     const nameInput = dialog.getByRole('textbox');
     await expect(nameInput).toBeVisible();
-    // Set value via evaluate to bypass focus-trap interactions, then dispatch
-    // the input event so the dialog's validateFn runs and enables OK.
-    await nameInput.evaluate((el: HTMLInputElement) => {
-      el.value = 'copy';
-      el.dispatchEvent(new Event('input', { bubbles: true }));
-      el.dispatchEvent(new Event('change', { bubbles: true }));
-    });
+    await nameInput.fill('copy');
     // Wait for OK to be enabled (dialog validates the name before enabling)
     const okBtn = dialog.getByRole('button', { name: 'OK' });
     await expect(okBtn).toBeEnabled({ timeout: 5000 });
