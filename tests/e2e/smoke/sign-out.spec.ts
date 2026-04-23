@@ -1,5 +1,4 @@
-import { test, expect } from '@playwright/test';
-import { createTestUser, deleteTestUser, injectSession } from '../fixtures';
+import { test, expect, createTestUser, deleteTestUser, injectSession } from '../fixtures';
 
 test('signed-in user can sign out via the menu', async ({ request, page }) => {
   const user = await createTestUser(request);

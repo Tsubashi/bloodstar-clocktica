@@ -1,20 +1,12 @@
-import { test, expect } from '@playwright/test';
-import { createTestUser, deleteTestUser, injectSession } from '../fixtures';
+import { test, expect, createTestUser, deleteTestUser, injectSession } from '../fixtures';
 
-const PROD_API = 'https://bloodstar.clocktica.com/api/';
-const LOCAL_API = 'http://localhost:8086/api/';
+// Browser-side API calls hit a hardcoded https://bloodstar.clocktica.com
+// origin; the `test` fixture from '../fixtures' intercepts and reroutes
+// them to localhost, so specs don't need per-file page.route() calls.
 
 test('user can create an edition and save it with Ctrl+S', async ({ request, page }) => {
   const user = await createTestUser(request);
   try {
-    // The app has a hardcoded production API URL. Intercept browser-side API
-    // calls and proxy them to the local test server so saves actually land.
-    await page.route(`${PROD_API}**`, async (route) => {
-      const url = route.request().url().replace(PROD_API, LOCAL_API);
-      const response = await route.fetch({ url });
-      await route.fulfill({ response });
-    });
-
     await injectSession(page, user.session);
     await page.goto('/');
     await page.getByRole('button', { name: 'Create New' }).click();
@@ -30,7 +22,7 @@ test('user can create an edition and save it with Ctrl+S', async ({ request, pag
     await nameInput.fill('my-smoke-edition');
     await page.getByRole('button', { name: 'OK' }).click();
 
-    // Assert via API that the save landed. This avoids flakiness in
+    // Assert via API that the save landed. Avoids flakiness in
     // post-save UI signals. Allow 15s for the server to complete the save.
     await expect.poll(async () => {
       const r = await request.post('/api/exists.php', {
