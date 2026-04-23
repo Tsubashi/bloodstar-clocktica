@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {BaseBinding, EnumProperty, Property, PropertyChangeListener} from './base-binding';
+import {BaseBinding, DisplayValuePair, DisplayValuePairs, EnumProperty, Property, PropertyChangeListener} from './base-binding';
 import AttributeBinding from './attribute-binding';
 import {CollectionBinding, CollectionBindingOptions} from './collection-binding';
 import {ImageChooserBinding, ImageDisplayBinding} from './image-binding';

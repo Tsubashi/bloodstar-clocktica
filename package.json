@@ -9,7 +9,7 @@
     "watch": "webpack --mode development --watch",
     "serve": "live-server --cors --port=8085 ./dist",
     "test": "vitest run",
-    "test:api": "echo 'API tests arrive in Phase 3 (Hurl).' && exit 0",
+    "test:api": "./scripts/run-api-tests.sh",
     "test:e2e": "echo 'E2E tests arrive in Phase 4 (Playwright).' && exit 0",
     "test:e2e:ui": "echo 'E2E UI mode arrives in Phase 4 (Playwright).' && exit 0",
     "test:all": "npm run test && npm run test:api && npm run test:e2e",
@@ -38,5 +38,11 @@
     "webpack": "^5.51.2",
     "webpack-cli": "^4.8.0"
   },
-  "packageManager": "yarn@4.13.0"
+  "packageManager": "yarn@4.13.0",
+  "resolutions": {
+    "@types/node": "20.6.0"
+  },
+  "overrides": {
+    "@types/node": "20.6.0"
+  }
 }
