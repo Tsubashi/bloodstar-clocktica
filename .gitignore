@@ -7,6 +7,9 @@
 !.yarn/sdks
 !.yarn/versions
 
+# Tests
+tests/api/.hurl-report/
+
 # Other
 node_modules/
 *.d.ts
