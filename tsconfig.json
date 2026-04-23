@@ -13,7 +13,8 @@
 			"dom",
 			"es2018"
 		],
-		"experimentalDecorators": true
+		"experimentalDecorators": true,
+		"types": []
 	},
 
 	"include": ["src/*"]

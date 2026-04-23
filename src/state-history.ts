@@ -110,16 +110,18 @@ export async function setState(state:HistoryState, canGoForward:boolean):Promise
 }
 
 /** watch for backing out of states */
-window.addEventListener('popstate', (e:PopStateEvent)=>{
-    const internalState:HistoryStateInternal|null = e.state;
-    const newDepth = internalState?.depth ?? 0;
-    if (newDepth < lastDepth) {
-        lastDepth = newDepth;
-        notifyListeners(internalState?.state ?? null);
-    }
-});
+if (typeof window !== 'undefined') {
+    window.addEventListener('popstate', (e:PopStateEvent)=>{
+        const internalState:HistoryStateInternal|null = e.state;
+        const newDepth = internalState?.depth ?? 0;
+        if (newDepth < lastDepth) {
+            lastDepth = newDepth;
+            notifyListeners(internalState?.state ?? null);
+        }
+    });
 
-// always start in no special state at all
-if (history.state !== null) {
-    history.replaceState(null, '');
+    // always start in no special state at all
+    if (history.state !== null) {
+        history.replaceState(null, '');
+    }
 }

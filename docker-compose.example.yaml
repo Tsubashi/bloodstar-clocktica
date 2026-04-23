@@ -11,6 +11,10 @@ services:
         published: ${WEB_PORT}
         mode: host
     environment:
+      # WARNING: if EMAIL_USER is empty, the mailer falls back to
+      # unauthenticated plain SMTP on EMAIL_PORT (see dist/mailer/shared_setup.php).
+      # Set EMAIL_USER to a real SMTP username in .env for production deployments,
+      # or this host will send unauthenticated mail to whatever EMAIL_HOST points at.
       - EMAIL_HOST=${EMAIL_HOST}
       - EMAIL_PORT=${EMAIL_PORT}
       - EMAIL_USER=${EMAIL_USER}

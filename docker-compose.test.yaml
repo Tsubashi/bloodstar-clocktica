@@ -1,0 +1,115 @@
+# Test stack — brought up and torn down by scripts/test-stack.sh.
+# Ports offset by +1 from the dev stack so both can run side by side.
+# All state lives in named volumes; `docker compose down -v` wipes fully.
+# All credentials here are throwaway values scoped to the test project.
+# Image tags are pinned so CI doesn't silently regress on upstream releases.
+# NOTE: nginx runs with the image's baked-in default.conf + the repo's
+# client_body_size.conf drop-in. Production overrides default.conf via a
+# bind mount (see docker-compose.example.yaml); the test stack does not,
+# so any prod-only nginx customization is not exercised here.
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: "no"
+    ports:
+      - "8086:8080"
+    environment:
+      EMAIL_HOST: mailhog
+      EMAIL_PORT: "1025"
+      EMAIL_USER: ""
+      EMAIL_PASS: ""
+      EMAIL_FROM: "noreply@test.local"
+      BLOODSTAR_ROOT_URL: "http://localhost:8086"
+    volumes:
+      - type: bind
+        source: ./tests/fixtures/protected
+        target: /var/www/protected
+        read_only: true
+      - type: volume
+        source: test_usersave
+        target: /var/www/html/usersave
+      - type: volume
+        source: test_published
+        target: /var/www/html/p
+    depends_on:
+      db:
+        condition: service_healthy
+      published-seed:
+        condition: service_completed_successfully
+      usersave-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/api/health.php"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 10s
+
+  db:
+    image: mariadb:11.4
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: bloodstar_test_root_password
+      MYSQL_DATABASE: bloodstar_db
+      MYSQL_USER: bloodstar_user
+      MYSQL_PASSWORD: bloodstar_test_password
+    volumes:
+      - type: volume
+        source: test_db_data
+        target: /var/lib/mysql
+      - type: bind
+        source: ./schema.sql
+        target: /docker-entrypoint-initdb.d/01-schema.sql
+        read_only: true
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 20s
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.1
+    restart: "no"
+    ports:
+      - "8026:8025"
+
+  published-seed:
+    image: alpine:3.21
+    # Runs before app (depends_on: service_completed_successfully) and always
+    # overwrites so updated fixture CSS wins on the next `up`.
+    # Also sets ownership so PHP (nobody, uid 65534) can create user subdirs.
+    command:
+      - sh
+      - -c
+      - "cp -f /seed/*.css /target/ && chown 65534:65534 /target && ls -la /target/"
+    volumes:
+      - type: bind
+        source: ./tests/fixtures/published
+        target: /seed
+        read_only: true
+      - type: volume
+        source: test_published
+        target: /target
+    restart: "no"
+
+  usersave-init:
+    image: alpine:3.21
+    # Set ownership of the usersave volume so PHP (nobody, uid 65534) can write.
+    command:
+      - sh
+      - -c
+      - "chown 65534:65534 /usersave"
+    volumes:
+      - type: volume
+        source: test_usersave
+        target: /usersave
+    restart: "no"
+
+volumes:
+  test_db_data:
+  test_usersave:
+  test_published:

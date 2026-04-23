@@ -7,12 +7,20 @@
     "builddev": "webpack --mode development",
     "buildprod": "webpack --mode production",
     "watch": "webpack --mode development --watch",
-    "serve": "live-server --cors --port=8085 ./dist"
+    "serve": "live-server --cors --port=8085 ./dist",
+    "test": "vitest run",
+    "test:api": "./scripts/run-api-tests.sh",
+    "test:e2e": "./scripts/run-e2e-tests.sh",
+    "test:e2e:ui": "./scripts/test-stack.sh up && npx playwright test --ui; ./scripts/test-stack.sh down",
+    "test:all": "npm run test && npm run test:api && npm run test:e2e",
+    "test:stack:up": "./scripts/test-stack.sh up",
+    "test:stack:down": "./scripts/test-stack.sh down"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
     "css-loader": "^6.2.0",
@@ -27,8 +35,15 @@
     "style-loader": "^3.2.1",
     "ts-loader": "^9.2.5",
     "typescript": "^4.4.2",
+    "vitest": "^4.1.5",
     "webpack": "^5.51.2",
     "webpack-cli": "^4.8.0"
   },
-  "packageManager": "yarn@4.13.0"
+  "packageManager": "yarn@4.13.0",
+  "resolutions": {
+    "@types/node": "20.6.0"
+  },
+  "overrides": {
+    "@types/node": "20.6.0"
+  }
 }

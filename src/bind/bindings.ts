@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {BaseBinding, Property, PropertyChangeListener} from './base-binding';
+import {BaseBinding, DisplayValuePair, DisplayValuePairs, EnumProperty, Property, PropertyChangeListener} from './base-binding';
 import AttributeBinding from './attribute-binding';
 import {CollectionBinding, CollectionBindingOptions} from './collection-binding';
 import {ImageChooserBinding, ImageDisplayBinding} from './image-binding';
@@ -8,33 +8,6 @@ import {StyleBinding} from './style-binding';
 import {VisibilityBinding} from './visibility-binding';
 import {ObservableCollection} from './observable-collection';
 import {ObservableObject} from './observable-object';
-
-export type DisplayValuePair<ValueType> = {display:string; value:ValueType};
-export type DisplayValuePairs<ValueType> = readonly DisplayValuePair<ValueType>[];
-
-/** observable property for an enum/select element */
-export class EnumProperty<ValueType> extends Property<ValueType> {
-    private options:DisplayValuePairs<ValueType>;
-
-    constructor(value:ValueType, displayValuePairs:DisplayValuePairs<ValueType>) {
-        super(value);
-        this.options = displayValuePairs;
-    }
-
-    /** get the display string for the current value */
-    getDisplay():string {
-        const myValue = this.get();
-        for (const {display, value} of this.options) {
-            if (value === myValue) {
-                return display;
-            }
-        }
-        return '';
-    }
-
-    /** get the {display,value} pairs for the enum options */
-    getOptions():DisplayValuePairs<ValueType> { return this.options; }
-}
 
 /** central authority on bindings */
 const bindings = new Map<Node, Binding[]>();
@@ -313,4 +286,5 @@ export async function unbindElementById(id:string):Promise<void> {
 }
 
 // re-export
-export {Property, PropertyChangeListener};
+export {Property, PropertyChangeListener, EnumProperty};
+export type {DisplayValuePair, DisplayValuePairs};

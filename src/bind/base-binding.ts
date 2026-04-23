@@ -6,6 +6,9 @@
 
 export type PropertyChangeListener<T> = (value:T)=>Promise<void>|void;
 
+export type DisplayValuePair<ValueType> = {display:string; value:ValueType};
+export type DisplayValuePairs<ValueType> = readonly DisplayValuePair<ValueType>[];
+
 /** generic observable property */
 export class Property<T> {
     private defaultValue:T;
@@ -54,6 +57,30 @@ export class Property<T> {
     private async notifyListeners():Promise<void> {
         await Promise.all(this.listeners.map(cb=>cb(this.value)));
     }
+}
+
+/** observable property for an enum/select element */
+export class EnumProperty<ValueType> extends Property<ValueType> {
+    private options:DisplayValuePairs<ValueType>;
+
+    constructor(value:ValueType, displayValuePairs:DisplayValuePairs<ValueType>) {
+        super(value);
+        this.options = displayValuePairs;
+    }
+
+    /** get the display string for the current value */
+    getDisplay():string {
+        const myValue = this.get();
+        for (const {display, value} of this.options) {
+            if (value === myValue) {
+                return display;
+            }
+        }
+        return '';
+    }
+
+    /** get the {display,value} pairs for the enum options */
+    getOptions():DisplayValuePairs<ValueType> { return this.options; }
 }
 
 export type SyncFromElementToPropertyFn = ((e:Event)=>Promise<void>)|null;

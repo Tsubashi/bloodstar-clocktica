@@ -1,0 +1,13 @@
+[
+  {
+    "id": "_meta",
+    "name": "Imported Edition",
+    "author": "Playwright Test"
+  },
+  {
+    "id": "importedchar",
+    "name": "Imported Character",
+    "team": "townsfolk",
+    "ability": "You start knowing something important."
+  }
+]

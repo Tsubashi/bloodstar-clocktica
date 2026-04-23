@@ -3,7 +3,7 @@
  * @module Character
  */
 import {CharacterAlmanac} from './character-almanac';
-import {EnumProperty, Property} from '../bind/bindings';
+import {EnumProperty, Property} from '../bind/base-binding';
 import {observableChild, observableEnumProperty, ObservableObject, observableProperty} from '../bind/observable-object';
 import {BloodTeam, BLOODTEAM_OPTIONS} from '../model/blood-team';
 import {CharacterImageSettings} from '../model/character-image-settings';

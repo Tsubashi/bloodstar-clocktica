@@ -178,6 +178,9 @@ export function showHideElement(element:Element, visible:boolean):void {
 }
 
 /** ordinal string based on number */
+// TODO: the 11/12/13 -> 'th' exception only fires for n === 11/12/13, not for
+// any number ending in those two digits. So 111 -> '111st' instead of '111th',
+// 212 -> '212nd' instead of '212th', etc. The canonical rule is `n % 100`.
 export function getOrdinalString(n:number):string {
     if (n <= 0) { return n.toFixed(0); }
     switch (n)
@@ -239,6 +242,9 @@ export function boundsCheck(i:unknown, arr:ArrayLike<unknown>):boolean {
 }
 
 /** test whether you have a thing with string keys */
+// TODO: returns true for arrays (typeof [] === 'object'), but the `x is
+// Record<string, unknown>` predicate claims to narrow to plain records.
+// Callers using this as a type guard will treat arrays as records.
 export function isRecord(x:unknown): x is Record<string, unknown> {
     if (x === null) {return false;}
     switch (typeof x) {

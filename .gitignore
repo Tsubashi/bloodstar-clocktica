@@ -7,6 +7,11 @@
 !.yarn/sdks
 !.yarn/versions
 
+# Tests
+tests/api/.hurl-report/
+playwright-report/
+test-results/
+
 # Other
 node_modules/
 *.d.ts

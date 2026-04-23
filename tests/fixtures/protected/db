@@ -1,0 +1,6 @@
+{
+  "host": "db",
+  "username": "bloodstar_user",
+  "password": "bloodstar_test_password",
+  "db": "bloodstar_db"
+}

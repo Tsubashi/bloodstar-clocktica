@@ -19,6 +19,21 @@ Once you have cloned the repository, you can get set up to work in it by:
     - [Visual Studio Keymap](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vs-keybindings)
 5. For debugging I just press F12 in Firefox or Chrome. Firefox is expecially nice for live-editting css because it has that 'changes' tab to keep track of what you did. Chrome seems to do a little better at showing source-mapped callstacks.
 
+## Testing
+
+The project has a three-layer test suite (Vitest units, Hurl API, Playwright
+E2E). See [`tests/README.md`](tests/README.md) and the design doc at
+[`docs/superpowers/specs/2026-04-20-testing-infrastructure-design.md`](docs/superpowers/specs/2026-04-20-testing-infrastructure-design.md).
+
+Quick start:
+
+```bash
+npm test               # unit (Phase 2+)
+npm run test:api       # API (Phase 3+)
+npm run test:e2e       # E2E (Phase 4+)
+npm run test:stack:up  # bring the test Compose stack up manually
+```
+
 ## Deploy to a new server
 
 For production deployments we recommend docker compose.
