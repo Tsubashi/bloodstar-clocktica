@@ -14,6 +14,7 @@ const teamColorStyleMap = new Map<BloodTeam, string>([
     [BloodTeam.TRAVELLER, 'teamColorTraveller'],
     [BloodTeam.FABLED, 'teamColorFabled'],
     [BloodTeam.JINXES, 'teamColorJinxes'],
+    [BloodTeam.LORIC, 'teamColorLoric'],
 ]);
 
 /** sync team color style to the actual team */

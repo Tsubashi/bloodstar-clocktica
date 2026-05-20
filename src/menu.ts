@@ -6,7 +6,6 @@ import * as bloodstar from "./bloodstar";
 import {showError, show as showMessage } from "./dlg/blood-message-dlg";
 import { Edition } from "./model/edition";
 import { hookupClickEvents, showHideElement } from "./util";
-import { importBlood } from './import/blood-file';
 import { importJsonFromFile, importJsonFromUrl, } from './import/json';
 import importOfficial from './import/official';
 import importShared from './import/shared';
@@ -95,7 +94,6 @@ export default function init(edition:Edition):void {
         ['saveFileAsButton', saveFileAsClicked],
         ['jsonFromUrlButton', importJsonFromUrl],
         ['jsonFromFileButton', importJsonFromFile],
-        ['importBloodButton', importBlood],
         ['importOfficialButton', importOfficialClicked],
         ['saveAndPublishButton', saveAndPublishClicked],
         ['sharingButton', sharingButtonClicked],

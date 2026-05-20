@@ -1,11 +1,10 @@
 {
 	"compilerOptions": {
-    "downlevelIteration": true,
 		"sourceMap": true,
 		"strict": true,
 		"noImplicitReturns": true,
 		"noImplicitThis": true,
-		"target": "es5",
+		"target": "es2015",
 		"declaration": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
