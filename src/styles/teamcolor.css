@@ -22,3 +22,6 @@ option {
 .teamColorJinxes {
     background-image: linear-gradient(to right, #ccc 2px, #cccccc00 2px, #cccccc00 25%, #cccccc40, #66666630);
 }
+.teamColorLoric {
+    background-image: linear-gradient(to right, #ccc 2px, #cccccc00 2px, #cccccc00 25%, #cccccc40, #66666630);
+}

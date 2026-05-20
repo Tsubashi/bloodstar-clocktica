@@ -10,6 +10,7 @@
 # Other
 node_modules/
 *.d.ts
+!src/global.d.ts
 .htpasswd
 .htaccess
 dist/*.html

@@ -596,6 +596,9 @@ export async function getGradientForTeam(team:BloodTeam, useOutsiderAndMinionCol
         case BloodTeam.JINXES:
             url = Images.JINXES_GRADIENT_URL;
             break;
+        case BloodTeam.LORIC:
+            url = Images.LORIC_GRADIENT_URL;
+            break;
         default:
             throw new Error(`getGradientForTeam: unhandled team "${team}"`);
     }
